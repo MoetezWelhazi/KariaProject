@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240204111223"
+  },
+  "applications": ["KariaMain", "property"],
+  "clientRootFolder": "property",
+  "databaseType": "sql",
+  "entityTableName": "review",
+  "fields": [
+    {
+      "fieldName": "reviewerId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "reviewContent",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "property",
+  "name": "Review",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "property",
+      "relationshipName": "propertyId",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

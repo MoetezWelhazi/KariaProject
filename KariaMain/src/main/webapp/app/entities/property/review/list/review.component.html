@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="ReviewHeading">
+    <span jhiTranslate="kariaMainApp.propertyReview.home.title">Reviews</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="kariaMainApp.propertyReview.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-review"
+        [routerLink]="['/review/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kariaMainApp.propertyReview.home.createLabel">Create a new Review</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (reviews?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kariaMainApp.propertyReview.home.notFound">No Reviews found</span>
+    </div>
+  }
+
+  @if (reviews && reviews.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reviewerId">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyReview.reviewerId">Reviewer Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rating">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyReview.rating">Rating</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reviewContent">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyReview.reviewContent">Review Content</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="propertyId.id">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyReview.propertyId">Property Id</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (review of reviews; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/review', review.id, 'view']">{{ review.id }}</a>
+              </td>
+              <td>{{ review.reviewerId }}</td>
+              <td>{{ review.rating }}</td>
+              <td>{{ review.reviewContent }}</td>
+              <td>
+                @if (review.propertyId) {
+                  <div>
+                    <a [routerLink]="['/property', review.propertyId.id, 'view']">{{ review.propertyId.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/review', review.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/review', review.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(review)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (reviews && reviews.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

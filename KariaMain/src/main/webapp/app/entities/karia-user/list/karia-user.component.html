@@ -1,0 +1,197 @@
+<div>
+  <h2 id="page-heading" data-cy="KariaUserHeading">
+    <span jhiTranslate="kariaMainApp.kariaUser.home.title">Karia Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="kariaMainApp.kariaUser.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-karia-user"
+        [routerLink]="['/karia-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kariaMainApp.kariaUser.home.createLabel">Create a new Karia User</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (kariaUsers?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kariaMainApp.kariaUser.home.notFound">No Karia Users found</span>
+    </div>
+  }
+
+  @if (kariaUsers && kariaUsers.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.lastName">Last Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phone">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.phone">Phone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="addressLine1">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.addressLine1">Address Line 1</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="addressLine2">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.addressLine2">Address Line 2</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="city">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.city">City</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="role">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.role">Role</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="avatar">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.avatar">Avatar</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.kariaUser.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (kariaUser of kariaUsers; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/karia-user', kariaUser.id, 'view']">{{ kariaUser.id }}</a>
+              </td>
+              <td>{{ kariaUser.firstName }}</td>
+              <td>{{ kariaUser.lastName }}</td>
+              <td jhiTranslate="{{ 'kariaMainApp.Gender.' + kariaUser.gender }}">{{ kariaUser.gender }}</td>
+              <td>{{ kariaUser.email }}</td>
+              <td>{{ kariaUser.phone }}</td>
+              <td>{{ kariaUser.addressLine1 }}</td>
+              <td>{{ kariaUser.addressLine2 }}</td>
+              <td>{{ kariaUser.city }}</td>
+              <td jhiTranslate="{{ 'kariaMainApp.RoleEnum.' + kariaUser.role }}">{{ kariaUser.role }}</td>
+              <td>
+                @if (kariaUser.avatar) {
+                  <a (click)="openFile(kariaUser.avatar, kariaUser.avatarContentType)">
+                    <img
+                      [src]="'data:' + kariaUser.avatarContentType + ';base64,' + kariaUser.avatar"
+                      style="max-height: 30px"
+                      alt="kariaUser image"
+                    />
+                  </a>
+                  <span>{{ kariaUser.avatarContentType }}, {{ byteSize(kariaUser.avatar) }}</span>
+                }
+              </td>
+              <td>
+                {{ kariaUser.user?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/karia-user', kariaUser.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/karia-user', kariaUser.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(kariaUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (kariaUsers && kariaUsers.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

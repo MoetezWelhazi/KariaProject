@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (property) {
+      <div>
+        <h2 data-cy="propertyDetailsHeading"><span jhiTranslate="kariaMainApp.propertyProperty.detail.title">Property</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ property.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.ownerId">Owner Id</span></dt>
+          <dd>
+            <span>{{ property.ownerId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.name">Name</span></dt>
+          <dd>
+            <span>{{ property.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.description">Description</span></dt>
+          <dd>
+            <span>{{ property.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.address">Address</span></dt>
+          <dd>
+            <span>{{ property.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.location">Location</span></dt>
+          <dd>
+            <span>{{ property.location }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.state">State</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'kariaMainApp.PropertyState.' + property.state }}">{{ property.state }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.visibility">Visibility</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'kariaMainApp.Visibility.' + property.visibility }}">{{ property.visibility }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image">Image</span></dt>
+          <dd>
+            @if (property.image) {
+              <div>
+                <a (click)="openFile(property.image, property.imageContentType)">
+                  <img
+                    [src]="'data:' + property.imageContentType + ';base64,' + property.image"
+                    style="max-width: 100%"
+                    alt="property image"
+                  />
+                </a>
+                {{ property.imageContentType }}, {{ byteSize(property.image) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.tags">Tags</span></dt>
+          <dd>
+            @for (tags of property.tags; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/tag', tags.id, 'view']">{{ tags.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/property', property.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

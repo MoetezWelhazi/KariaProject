@@ -1,0 +1,143 @@
+
+ 
+application {
+  config {
+    baseName KariaMain
+    applicationType gateway
+    packageName com.jhipster.demo.store
+    serviceDiscoveryType consul
+    authenticationType oauth2
+    prodDatabaseType mysql
+    cacheProvider no
+    buildTool maven
+    clientFramework angular
+    testFrameworks [cypress]
+    reactive false
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName property
+    applicationType microservice
+    packageName com.jhipster.demo.product
+    serviceDiscoveryType consul
+    authenticationType oauth2
+    prodDatabaseType mysql
+    cacheProvider hazelcast
+    buildTool maven
+    serverPort 8081
+    messageBroker kafka
+  }
+  entities Property, Tag, Review
+}
+
+application {
+  config {
+    baseName notification
+    applicationType microservice
+    packageName com.jhipster.demo.notification
+    serviceDiscoveryType consul
+    authenticationType oauth2
+    databaseType mongodb
+    prodDatabaseType mongodb
+    devDatabaseType mongodb
+    cacheProvider no
+    enableHibernateCache false
+    buildTool maven
+    serverPort 8083
+    messageBroker kafka
+  }
+  entities Notification
+}
+
+/* Entities for KariaMain Gateway */
+
+entity KariaUser {
+    firstName String required
+    lastName String required
+    gender Gender required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    phone String required
+    addressLine1 String required
+    addressLine2 String
+    city String required
+    role RoleEnum required
+    avatar ImageBlob
+}
+
+enum RoleEnum {
+	RENTEE, RENTOR
+}
+
+enum Gender {
+    MALE, FEMALE, OTHER
+}
+
+relationship OneToOne {
+    KariaUser{user(login) required} to User with builtInEntity
+}
+
+service KariaUser with serviceClass
+paginate KariaUser with pagination
+
+
+/** Entities for property Microservice */
+entity Property {
+	ownerId String required
+    name String required
+    description String
+    address String required
+    location String
+    state PropertyState required
+    visibility Visibility
+    image ImageBlob
+}
+
+enum Visibility {
+	PUBLIC, PRIVATE
+}
+
+enum PropertyState {
+    AVAILABLE, UNAVAILABLE, RENTED
+}
+
+entity Tag {
+	name String required
+}
+
+relationship ManyToMany {
+	Property{tags required} to Tag{properties}
+}
+
+entity Review{
+	reviewerId String required
+    rating Integer required
+    reviewContent String
+}
+
+relationship OneToMany{
+    Property to Review{propertyId}
+}
+
+service Property, Tag with serviceClass
+paginate Property, Review with pagination
+microservice Property, Tag, Review with property
+
+
+/* Entities for notification microservice */
+
+entity Notification {
+    date Instant required
+    details String
+    sentDate Instant required
+    format NotificationType required
+    userId Long required
+}
+
+enum NotificationType {
+    EMAIL, SMS
+}
+
+microservice Notification with notification

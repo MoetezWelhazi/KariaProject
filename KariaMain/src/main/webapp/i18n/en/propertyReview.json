@@ -1,0 +1,31 @@
+{
+  "kariaMainApp": {
+    "propertyReview": {
+      "home": {
+        "title": "Reviews",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Review",
+        "createOrEditLabel": "Create or edit a Review",
+        "notFound": "No Reviews found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Review {{ id }}?"
+      },
+      "detail": {
+        "title": "Review"
+      },
+      "id": "ID",
+      "reviewerId": "Reviewer Id",
+      "rating": "Rating",
+      "reviewContent": "Review Content",
+      "propertyId": "Property Id"
+    }
+  },
+  "propertyApp": {
+    "propertyReview": {
+      "created": "A new Review is created with identifier {{ param }}",
+      "updated": "A Review is updated with identifier {{ param }}",
+      "deleted": "A Review is deleted with identifier {{ param }}"
+    }
+  }
+}

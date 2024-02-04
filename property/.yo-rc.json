@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "oauth2",
+    "baseName": "property",
+    "buildTool": "maven",
+    "cacheProvider": "hazelcast",
+    "entities": ["Property", "Tag", "Review"],
+    "jhipsterVersion": "8.1.0",
+    "jwtSecretKey": "ZDMwYmU1ZTVhNzkyODlmMWNjODU3MmQ3YWJiNWRhMGFmNTI1MjVkY2Q2MjQ0OTc4ZmFlZGI0ZWViYjE1YTM1MDRjZGQyOWE1NmRmM2E0YjU0MzVmYTkzZjRiNThkYzZlYzk3NTQ4MjU3OWIxNDcxMjkzMGY3YjMwNDY4ZDBhNjQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1707045083000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/jhipster/demo/product",
+    "packageName": "com.jhipster.demo.product",
+    "prodDatabaseType": "mysql",
+    "serverPort": "8081",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

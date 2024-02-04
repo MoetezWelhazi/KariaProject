@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "notification": {
+        "applicationIndex": 2,
+        "serverPort": "8083"
+      },
+      "property": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      }
+    },
+    "authenticationType": "oauth2",
+    "baseName": "KariaMain",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "clientFramework": "angular",
+    "devServerPort": 4200,
+    "entities": ["KariaUser", "Property", "Tag", "Review", "Notification"],
+    "jhipsterVersion": "8.1.0",
+    "jwtSecretKey": "ODdmN2NlMzFiYmNkZmNhYWZjODZiOTdkNTgwZmMxMDQyMGQ0MmUxYmYxMTU4NTJiNzZiZjEwNDI2NWRhMWI4NGQwMzg5NGMzZDRlODBiMDJlYzE4NDdlNTI3YjM1ZWY0YjRlYjE3MTZmMmNlODZmNTM4NTg3MjU0NmI3NDhjMDQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1707045203000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/jhipster/demo/store",
+    "packageName": "com.jhipster.demo.store",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serviceDiscoveryType": "consul",
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "testFrameworks": ["cypress"]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "annotations": {
+    "changelogDate": "20240204111023"
+  },
+  "applications": ["KariaMain", "property"],
+  "clientRootFolder": "property",
+  "databaseType": "sql",
+  "documentation": "Entities for property Microservice",
+  "entityTableName": "property",
+  "fields": [
+    {
+      "fieldName": "ownerId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "PropertyState",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "AVAILABLE,UNAVAILABLE,RENTED"
+    },
+    {
+      "fieldName": "visibility",
+      "fieldType": "Visibility",
+      "fieldValues": "PUBLIC,PRIVATE"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "microserviceName": "property",
+  "name": "Property",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "review",
+      "otherEntityRelationshipName": "propertyId",
+      "relationshipName": "review",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "properties",
+      "relationshipName": "tags",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,11 @@
+{
+  "generator-jhipster": {
+    "appsFolders": ["KariaMain", "notification", "property"],
+    "clusteredDbApps": [],
+    "directoryPath": "../",
+    "jhipsterVersion": "8.1.0",
+    "jwtSecretKey": "ZDUzM2NlMjU5NDBmOGQwNTkzNmUxZGEyYjM2MDIxMmMzNDEzNjIzODBmYWYwZGZiY2I3ODU2MjQ4ODQ4ZGFlZDg3ZTY1MGUwNjE0OGY4MmVhM2UwMzRiNzdhMzE5OWRhOGNhYQ==",
+    "monitoring": "no",
+    "serviceDiscoveryType": "consul"
+  }
+}

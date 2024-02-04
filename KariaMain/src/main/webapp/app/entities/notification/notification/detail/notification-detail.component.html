@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notification) {
+      <div>
+        <h2 data-cy="notificationDetailsHeading">
+          <span jhiTranslate="kariaMainApp.notificationNotification.detail.title">Notification</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notification.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.notificationNotification.date">Date</span></dt>
+          <dd>
+            <span>{{ notification.date | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.notificationNotification.details">Details</span></dt>
+          <dd>
+            <span>{{ notification.details }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.notificationNotification.sentDate">Sent Date</span></dt>
+          <dd>
+            <span>{{ notification.sentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.notificationNotification.format">Format</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'kariaMainApp.NotificationType.' + notification.format }}">{{ notification.format }}</span>
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.notificationNotification.userId">User Id</span></dt>
+          <dd>
+            <span>{{ notification.userId }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification', notification.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

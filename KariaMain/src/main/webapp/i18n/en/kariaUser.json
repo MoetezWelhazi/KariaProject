@@ -1,0 +1,34 @@
+{
+  "kariaMainApp": {
+    "kariaUser": {
+      "home": {
+        "title": "Karia Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Karia User",
+        "createOrEditLabel": "Create or edit a Karia User",
+        "notFound": "No Karia Users found"
+      },
+      "created": "A new Karia User is created with identifier {{ param }}",
+      "updated": "A Karia User is updated with identifier {{ param }}",
+      "deleted": "A Karia User is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Karia User {{ id }}?"
+      },
+      "detail": {
+        "title": "Karia User"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "gender": "Gender",
+      "email": "Email",
+      "phone": "Phone",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "city": "City",
+      "role": "Role",
+      "avatar": "Avatar",
+      "user": "User"
+    }
+  }
+}

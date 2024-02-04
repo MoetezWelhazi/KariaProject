@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-review-heading" data-cy="ReviewCreateUpdateHeading" jhiTranslate="kariaMainApp.propertyReview.home.createOrEditLabel">
+        Create or edit a Review
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyReview.reviewerId" for="field_reviewerId">Reviewer Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="reviewerId"
+            id="field_reviewerId"
+            data-cy="reviewerId"
+            formControlName="reviewerId"
+          />
+          @if (editForm.get('reviewerId')!.invalid && (editForm.get('reviewerId')!.dirty || editForm.get('reviewerId')!.touched)) {
+            <div>
+              @if (editForm.get('reviewerId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyReview.rating" for="field_rating">Rating</label>
+          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
+          @if (editForm.get('rating')!.invalid && (editForm.get('rating')!.dirty || editForm.get('rating')!.touched)) {
+            <div>
+              @if (editForm.get('rating')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('rating')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyReview.reviewContent" for="field_reviewContent"
+            >Review Content</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="reviewContent"
+            id="field_reviewContent"
+            data-cy="reviewContent"
+            formControlName="reviewContent"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyReview.propertyId" for="field_propertyId">Property Id</label>
+          <select
+            class="form-control"
+            id="field_propertyId"
+            data-cy="propertyId"
+            name="propertyId"
+            formControlName="propertyId"
+            [compareWith]="compareProperty"
+          >
+            <option [ngValue]="null"></option>
+            @for (propertyOption of propertiesSharedCollection; track $index) {
+              <option [ngValue]="propertyOption">{{ propertyOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

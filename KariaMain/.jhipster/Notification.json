@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240204111323"
+  },
+  "applications": ["KariaMain", "notification"],
+  "clientRootFolder": "notification",
+  "databaseType": "sql",
+  "entityTableName": "notification",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sentDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "NotificationType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EMAIL,SMS"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "notification",
+  "name": "Notification",
+  "relationships": [],
+  "searchEngine": "no"
+}

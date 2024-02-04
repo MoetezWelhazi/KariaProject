@@ -1,0 +1,9 @@
+{
+  "kariaMainApp": {
+    "RoleEnum": {
+      "null": "",
+      "RENTEE": "RENTEE",
+      "RENTOR": "RENTOR"
+    }
+  }
+}

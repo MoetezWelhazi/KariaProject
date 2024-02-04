@@ -1,0 +1,10 @@
+{
+  "kariaMainApp": {
+    "PropertyState": {
+      "null": "",
+      "AVAILABLE": "AVAILABLE",
+      "UNAVAILABLE": "UNAVAILABLE",
+      "RENTED": "RENTED"
+    }
+  }
+}

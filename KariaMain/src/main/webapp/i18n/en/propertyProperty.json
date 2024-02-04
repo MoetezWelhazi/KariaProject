@@ -1,0 +1,37 @@
+{
+  "kariaMainApp": {
+    "propertyProperty": {
+      "home": {
+        "title": "Properties",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Property",
+        "createOrEditLabel": "Create or edit a Property",
+        "notFound": "No Properties found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Property {{ id }}?"
+      },
+      "detail": {
+        "title": "Property"
+      },
+      "id": "ID",
+      "ownerId": "Owner Id",
+      "name": "Name",
+      "description": "Description",
+      "address": "Address",
+      "location": "Location",
+      "state": "State",
+      "visibility": "Visibility",
+      "image": "Image",
+      "review": "Review",
+      "tags": "Tags"
+    }
+  },
+  "propertyApp": {
+    "propertyProperty": {
+      "created": "A new Property is created with identifier {{ param }}",
+      "updated": "A Property is updated with identifier {{ param }}",
+      "deleted": "A Property is deleted with identifier {{ param }}"
+    }
+  }
+}
