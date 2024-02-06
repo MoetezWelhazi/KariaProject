@@ -1,0 +1,7 @@
+{
+  "generator-jhipster": {
+    "baseName": "kariaPrjComp",
+    "entities": [],
+    "jhipsterVersion": "8.1.0"
+  }
+}
