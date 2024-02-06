@@ -1,5 +1,11 @@
 name: KariaMain CI
-on: [push, pull_request]
+on: #[push, pull_request]
+  - push:
+      - "KariaMain/**"
+      - ".github/workflows/kariamain-workflow.yml"
+  - pull_request:
+      - "KariaMain/**"
+      - ".github/workflows/kariamain-workflow.yml"
 jobs:
   pipeline:
     name: KariaMain pipeline
@@ -13,6 +19,8 @@ jobs:
       JHI_DISABLE_WEBPACK_LOGS: true
       NG_CLI_ANALYTICS: false
     steps:
+      - name: Locating KariaMain microservice directory
+        run: cd KariaMain
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
