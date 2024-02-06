@@ -1,11 +1,13 @@
 name: Property CI
 on:
   - push:
-      - "property/**"
-      - ".github/workflows/property-workflow.yml"
+      paths:
+        - "property/**"
+        - ".github/workflows/property-workflow.yml"
   - pull_request:
-      - "property/**"
-      - ".github/workflows/property-workflow.yml"
+      paths:
+        - "property/**"
+        - ".github/workflows/property-workflow.yml"
 
 jobs:
   pipeline:
