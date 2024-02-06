@@ -1,5 +1,5 @@
 name: KariaMain CI
-on: #[push, pull_request]
+on:
   - push:
       - "KariaMain/**"
       - ".github/workflows/kariamain-workflow.yml"
