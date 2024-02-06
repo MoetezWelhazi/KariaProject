@@ -1,13 +1,13 @@
 name: KariaMain CI
 on:
-  - push:
-      paths:
-        - "KariaMain/**"
-        - ".github/workflows/kariamain-workflow.yml"
-  - pull_request:
-      paths:
-        - "KariaMain/**"
-        - ".github/workflows/kariamain-workflow.yml"
+  push:
+    paths:
+      - "KariaMain/**"
+      - ".github/workflows/kariamain-workflow.yml"
+  pull_request:
+    paths:
+      - "KariaMain/**"
+      - ".github/workflows/kariamain-workflow.yml"
 jobs:
   pipeline:
     name: KariaMain pipeline
