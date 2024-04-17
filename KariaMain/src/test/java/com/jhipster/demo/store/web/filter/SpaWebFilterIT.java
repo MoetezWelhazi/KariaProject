@@ -33,6 +33,11 @@ class SpaWebFilterIT {
     }
 
     @Test
+    void testFilterDoesNotForwardToIndexForApi() {
+        webTestClient.get().uri("/api/authenticate").exchange().expectStatus().isOk().expectBody(String.class).isEqualTo("user");
+    }
+
+    @Test
     @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
     void testFilterDoesNotForwardToIndexForV3ApiDocs() {
         webTestClient

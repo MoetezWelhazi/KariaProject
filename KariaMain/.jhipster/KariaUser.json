@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240204110923"
+    "changelogDate": "20240417193556"
   },
   "applications": ["KariaMain"],
   "databaseType": "sql",

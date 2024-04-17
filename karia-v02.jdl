@@ -6,7 +6,7 @@ application {
     applicationType gateway
     packageName com.jhipster.demo.store
     serviceDiscoveryType consul
-    authenticationType oauth2
+    authenticationType jwt
     prodDatabaseType mysql
     cacheProvider no
     buildTool maven
@@ -23,7 +23,7 @@ application {
     applicationType microservice
     packageName com.jhipster.demo.product
     serviceDiscoveryType consul
-    authenticationType oauth2
+    authenticationType jwt
     prodDatabaseType mysql
     cacheProvider hazelcast
     buildTool maven
@@ -39,7 +39,7 @@ application {
     applicationType microservice
     packageName com.jhipster.demo.notification
     serviceDiscoveryType consul
-    authenticationType oauth2
+    authenticationType jwt
     databaseType mongodb
     prodDatabaseType mongodb
     devDatabaseType mongodb
@@ -92,7 +92,11 @@ entity Property {
     location String
     state PropertyState required
     visibility Visibility
-    image ImageBlob
+    image1 ImageBlob
+    image2 ImageBlob
+    image3 ImageBlob
+    image4 ImageBlob
+    image5 ImageBlob
 }
 
 enum Visibility {

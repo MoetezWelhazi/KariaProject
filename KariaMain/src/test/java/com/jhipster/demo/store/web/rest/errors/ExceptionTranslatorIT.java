@@ -1,11 +1,8 @@
 package com.jhipster.demo.store.web.rest.errors;
 
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.csrf;
-
 import com.jhipster.demo.store.IntegrationTest;
 import org.hamcrest.core.AnyOf;
 import org.hamcrest.core.IsEqual;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -24,11 +21,6 @@ class ExceptionTranslatorIT {
 
     @Autowired
     private WebTestClient webTestClient;
-
-    @BeforeEach
-    public void setupCsrf() {
-        webTestClient = webTestClient.mutateWith(csrf());
-    }
 
     @Test
     void testConcurrencyFailure() {

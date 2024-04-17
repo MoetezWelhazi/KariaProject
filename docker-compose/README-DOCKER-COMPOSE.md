@@ -23,4 +23,3 @@ Launch all your infrastructure by running: `docker compose up -d`.
 
 - Kafka
 - Zookeeper
-- [Keycloak server](http://localhost:9080)

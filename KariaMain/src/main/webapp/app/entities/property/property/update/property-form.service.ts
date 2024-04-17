@@ -25,8 +25,16 @@ type PropertyFormGroupContent = {
   location: FormControl<IProperty['location']>;
   state: FormControl<IProperty['state']>;
   visibility: FormControl<IProperty['visibility']>;
-  image: FormControl<IProperty['image']>;
-  imageContentType: FormControl<IProperty['imageContentType']>;
+  image1: FormControl<IProperty['image1']>;
+  image1ContentType: FormControl<IProperty['image1ContentType']>;
+  image2: FormControl<IProperty['image2']>;
+  image2ContentType: FormControl<IProperty['image2ContentType']>;
+  image3: FormControl<IProperty['image3']>;
+  image3ContentType: FormControl<IProperty['image3ContentType']>;
+  image4: FormControl<IProperty['image4']>;
+  image4ContentType: FormControl<IProperty['image4ContentType']>;
+  image5: FormControl<IProperty['image5']>;
+  image5ContentType: FormControl<IProperty['image5ContentType']>;
   tags: FormControl<IProperty['tags']>;
 };
 
@@ -62,8 +70,16 @@ export class PropertyFormService {
         validators: [Validators.required],
       }),
       visibility: new FormControl(propertyRawValue.visibility),
-      image: new FormControl(propertyRawValue.image),
-      imageContentType: new FormControl(propertyRawValue.imageContentType),
+      image1: new FormControl(propertyRawValue.image1),
+      image1ContentType: new FormControl(propertyRawValue.image1ContentType),
+      image2: new FormControl(propertyRawValue.image2),
+      image2ContentType: new FormControl(propertyRawValue.image2ContentType),
+      image3: new FormControl(propertyRawValue.image3),
+      image3ContentType: new FormControl(propertyRawValue.image3ContentType),
+      image4: new FormControl(propertyRawValue.image4),
+      image4ContentType: new FormControl(propertyRawValue.image4ContentType),
+      image5: new FormControl(propertyRawValue.image5),
+      image5ContentType: new FormControl(propertyRawValue.image5ContentType),
       tags: new FormControl(propertyRawValue.tags ?? []),
     });
   }

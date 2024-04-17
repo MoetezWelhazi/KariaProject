@@ -15,7 +15,7 @@ describe('Notification e2e test', () => {
   const notificationPageUrlPattern = new RegExp('/notification(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const notificationSample = { date: '2024-02-03T21:18:03.383Z', sentDate: '2024-02-04T00:55:31.300Z', format: 'SMS', userId: 30628 };
+  const notificationSample = { date: '2024-04-17T05:44:36.383Z', sentDate: '2024-04-17T09:22:04.300Z', format: 'SMS', userId: 30628 };
 
   let notification;
 
@@ -157,16 +157,16 @@ describe('Notification e2e test', () => {
     });
 
     it('should create an instance of Notification', () => {
-      cy.get(`[data-cy="date"]`).type('2024-02-03T17:39');
+      cy.get(`[data-cy="date"]`).type('2024-04-17T02:06');
       cy.get(`[data-cy="date"]`).blur();
-      cy.get(`[data-cy="date"]`).should('have.value', '2024-02-03T17:39');
+      cy.get(`[data-cy="date"]`).should('have.value', '2024-04-17T02:06');
 
       cy.get(`[data-cy="details"]`).type('off rejoin');
       cy.get(`[data-cy="details"]`).should('have.value', 'off rejoin');
 
-      cy.get(`[data-cy="sentDate"]`).type('2024-02-03T12:46');
+      cy.get(`[data-cy="sentDate"]`).type('2024-04-16T21:12');
       cy.get(`[data-cy="sentDate"]`).blur();
-      cy.get(`[data-cy="sentDate"]`).should('have.value', '2024-02-03T12:46');
+      cy.get(`[data-cy="sentDate"]`).should('have.value', '2024-04-16T21:12');
 
       cy.get(`[data-cy="format"]`).select('SMS');
 

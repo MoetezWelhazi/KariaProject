@@ -2,7 +2,6 @@ package com.jhipster.demo.store;
 
 import com.jhipster.demo.store.config.AsyncSyncConfiguration;
 import com.jhipster.demo.store.config.EmbeddedSQL;
-import com.jhipster.demo.store.config.TestSecurityConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,7 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = { KariaMainApp.class, AsyncSyncConfiguration.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = { KariaMainApp.class, AsyncSyncConfiguration.class })
 @EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public @interface IntegrationTest {

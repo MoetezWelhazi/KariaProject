@@ -12,7 +12,7 @@
         "serverPort": "8081"
       }
     },
-    "authenticationType": "oauth2",
+    "authenticationType": "jwt",
     "baseName": "KariaMain",
     "buildTool": "maven",
     "cacheProvider": "no",
@@ -20,9 +20,9 @@
     "devServerPort": 4200,
     "entities": ["KariaUser", "Property", "Tag", "Review", "Notification"],
     "jhipsterVersion": "8.1.0",
-    "jwtSecretKey": "ODdmN2NlMzFiYmNkZmNhYWZjODZiOTdkNTgwZmMxMDQyMGQ0MmUxYmYxMTU4NTJiNzZiZjEwNDI2NWRhMWI4NGQwMzg5NGMzZDRlODBiMDJlYzE4NDdlNTI3YjM1ZWY0YjRlYjE3MTZmMmNlODZmNTM4NTg3MjU0NmI3NDhjMDQ=",
+    "jwtSecretKey": "MzJmYmFkM2JkMmU5Njc4MGM5NzY0Nzk2NzE4ZWI5NDJiODdkZTNmNjZmODU1YzhmMjE4YWU5M2Q0ZGY2NGU1N2UyNGVlMWYzMDAzZTcyNzAwMTgwYWY4MjZjM2VhYWRlNWZhMDljYTEyOWQwMmZhMWZjZjg3YzY4OWJmY2EwZjQ=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1707045203000,
+    "lastLiquibaseTimestamp": 1713382796000,
     "monorepository": true,
     "nativeLanguage": "en",
     "packageFolder": "com/jhipster/demo/store",
@@ -31,7 +31,6 @@
     "reactive": true,
     "serviceDiscoveryType": "consul",
     "skipCommitHook": true,
-    "skipUserManagement": true,
     "testFrameworks": ["cypress"]
   }
 }

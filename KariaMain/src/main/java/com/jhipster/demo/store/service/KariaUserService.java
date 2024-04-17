@@ -150,5 +150,4 @@ public class KariaUserService {
         log.debug("Request to delete KariaUser : {}", id);
         return kariaUserRepository.deleteById(id);
     }
-
 }

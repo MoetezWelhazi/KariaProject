@@ -91,9 +91,37 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="image">
+            <th scope="col" jhiSortBy="image1">
               <div class="d-flex">
-                <span jhiTranslate="kariaMainApp.propertyProperty.image">Image</span>
+                <span jhiTranslate="kariaMainApp.propertyProperty.image1">Image 1</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="image2">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyProperty.image2">Image 2</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="image3">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyProperty.image3">Image 3</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="image4">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyProperty.image4">Image 4</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="image5">
+              <div class="d-flex">
+                <span jhiTranslate="kariaMainApp.propertyProperty.image5">Image 5</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -115,15 +143,63 @@
               <td jhiTranslate="{{ 'kariaMainApp.PropertyState.' + property.state }}">{{ property.state }}</td>
               <td jhiTranslate="{{ 'kariaMainApp.Visibility.' + property.visibility }}">{{ property.visibility }}</td>
               <td>
-                @if (property.image) {
-                  <a (click)="openFile(property.image, property.imageContentType)">
+                @if (property.image1) {
+                  <a (click)="openFile(property.image1, property.image1ContentType)">
                     <img
-                      [src]="'data:' + property.imageContentType + ';base64,' + property.image"
+                      [src]="'data:' + property.image1ContentType + ';base64,' + property.image1"
                       style="max-height: 30px"
                       alt="property image"
                     />
                   </a>
-                  <span>{{ property.imageContentType }}, {{ byteSize(property.image) }}</span>
+                  <span>{{ property.image1ContentType }}, {{ byteSize(property.image1) }}</span>
+                }
+              </td>
+              <td>
+                @if (property.image2) {
+                  <a (click)="openFile(property.image2, property.image2ContentType)">
+                    <img
+                      [src]="'data:' + property.image2ContentType + ';base64,' + property.image2"
+                      style="max-height: 30px"
+                      alt="property image"
+                    />
+                  </a>
+                  <span>{{ property.image2ContentType }}, {{ byteSize(property.image2) }}</span>
+                }
+              </td>
+              <td>
+                @if (property.image3) {
+                  <a (click)="openFile(property.image3, property.image3ContentType)">
+                    <img
+                      [src]="'data:' + property.image3ContentType + ';base64,' + property.image3"
+                      style="max-height: 30px"
+                      alt="property image"
+                    />
+                  </a>
+                  <span>{{ property.image3ContentType }}, {{ byteSize(property.image3) }}</span>
+                }
+              </td>
+              <td>
+                @if (property.image4) {
+                  <a (click)="openFile(property.image4, property.image4ContentType)">
+                    <img
+                      [src]="'data:' + property.image4ContentType + ';base64,' + property.image4"
+                      style="max-height: 30px"
+                      alt="property image"
+                    />
+                  </a>
+                  <span>{{ property.image4ContentType }}, {{ byteSize(property.image4) }}</span>
+                }
+              </td>
+              <td>
+                @if (property.image5) {
+                  <a (click)="openFile(property.image5, property.image5ContentType)">
+                    <img
+                      [src]="'data:' + property.image5ContentType + ';base64,' + property.image5"
+                      style="max-height: 30px"
+                      alt="property image"
+                    />
+                  </a>
+                  <span>{{ property.image5ContentType }}, {{ byteSize(property.image5) }}</span>
                 }
               </td>
               <td class="text-end">

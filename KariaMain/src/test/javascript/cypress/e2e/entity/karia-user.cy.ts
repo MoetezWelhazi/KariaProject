@@ -30,7 +30,7 @@ describe('KariaUser e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/users',
-      body: {"id":"b6bc5edb-0b50-4e0b-b1b1-92f7cb80b9f8","login":"inasmuch unless pertinent","firstName":"Cory","lastName":"Bartell"},
+      body: {"login":"beyond","firstName":"Blanche","lastName":"Robel"},
     }).then(({ body }) => {
       user = body;
     });

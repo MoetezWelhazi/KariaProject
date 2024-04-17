@@ -15,7 +15,7 @@ describe('Property e2e test', () => {
   const propertyPageUrlPattern = new RegExp('/property(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const propertySample = { ownerId: 'mid false uh-huh', name: 'gah', address: 'time reasonable', state: 'RENTED' };
+  const propertySample = { ownerId: 'admit worriedly offensive', name: 'while insidious', address: 'hmph daring', state: 'AVAILABLE' };
 
   let property;
   let tag;
@@ -199,26 +199,34 @@ describe('Property e2e test', () => {
     });
 
     it('should create an instance of Property', () => {
-      cy.get(`[data-cy="ownerId"]`).type('yet whoa tournament');
-      cy.get(`[data-cy="ownerId"]`).should('have.value', 'yet whoa tournament');
+      cy.get(`[data-cy="ownerId"]`).type('print though');
+      cy.get(`[data-cy="ownerId"]`).should('have.value', 'print though');
 
-      cy.get(`[data-cy="name"]`).type('joshingly');
-      cy.get(`[data-cy="name"]`).should('have.value', 'joshingly');
+      cy.get(`[data-cy="name"]`).type('violently');
+      cy.get(`[data-cy="name"]`).should('have.value', 'violently');
 
-      cy.get(`[data-cy="description"]`).type('smoggy');
-      cy.get(`[data-cy="description"]`).should('have.value', 'smoggy');
+      cy.get(`[data-cy="description"]`).type('phew');
+      cy.get(`[data-cy="description"]`).should('have.value', 'phew');
 
-      cy.get(`[data-cy="address"]`).type('boatyard');
-      cy.get(`[data-cy="address"]`).should('have.value', 'boatyard');
+      cy.get(`[data-cy="address"]`).type('though quench');
+      cy.get(`[data-cy="address"]`).should('have.value', 'though quench');
 
-      cy.get(`[data-cy="location"]`).type('valiantly teenager');
-      cy.get(`[data-cy="location"]`).should('have.value', 'valiantly teenager');
+      cy.get(`[data-cy="location"]`).type('before');
+      cy.get(`[data-cy="location"]`).should('have.value', 'before');
 
-      cy.get(`[data-cy="state"]`).select('UNAVAILABLE');
+      cy.get(`[data-cy="state"]`).select('RENTED');
 
       cy.get(`[data-cy="visibility"]`).select('PRIVATE');
 
-      cy.setFieldImageAsBytesOfEntity('image', 'integration-test.png', 'image/png');
+      cy.setFieldImageAsBytesOfEntity('image1', 'integration-test.png', 'image/png');
+
+      cy.setFieldImageAsBytesOfEntity('image2', 'integration-test.png', 'image/png');
+
+      cy.setFieldImageAsBytesOfEntity('image3', 'integration-test.png', 'image/png');
+
+      cy.setFieldImageAsBytesOfEntity('image4', 'integration-test.png', 'image/png');
+
+      cy.setFieldImageAsBytesOfEntity('image5', 'integration-test.png', 'image/png');
 
       cy.get(`[data-cy="tags"]`).select([0]);
 

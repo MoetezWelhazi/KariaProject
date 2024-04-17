@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.csrf;
 
 import com.jhipster.demo.store.IntegrationTest;
 import com.jhipster.demo.store.domain.KariaUser;
@@ -157,11 +156,6 @@ class KariaUserResourceIT {
     @AfterEach
     public void cleanup() {
         deleteEntities(em);
-    }
-
-    @BeforeEach
-    public void setupCsrf() {
-        webTestClient = webTestClient.mutateWith(csrf());
     }
 
     @BeforeEach

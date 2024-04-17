@@ -50,10 +50,10 @@ describe('Review Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Property query and add missing value', () => {
       const review: IReview = { id: 456 };
-      const propertyId: IProperty = { id: 12054 };
+      const propertyId: IProperty = { id: 1227 };
       review.propertyId = propertyId;
 
-      const propertyCollection: IProperty[] = [{ id: 20022 }];
+      const propertyCollection: IProperty[] = [{ id: 7430 }];
       jest.spyOn(propertyService, 'query').mockReturnValue(of(new HttpResponse({ body: propertyCollection })));
       const additionalProperties = [propertyId];
       const expectedCollection: IProperty[] = [...additionalProperties, ...propertyCollection];
@@ -72,7 +72,7 @@ describe('Review Management Update Component', () => {
 
     it('Should update editForm', () => {
       const review: IReview = { id: 456 };
-      const propertyId: IProperty = { id: 12421 };
+      const propertyId: IProperty = { id: 23366 };
       review.propertyId = propertyId;
 
       activatedRoute.data = of({ review });

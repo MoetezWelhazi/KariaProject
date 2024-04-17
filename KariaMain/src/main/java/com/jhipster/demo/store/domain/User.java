@@ -7,13 +7,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -21,17 +21,23 @@ import org.springframework.data.relational.core.mapping.Table;
  * A user.
  */
 @Table("jhi_user")
-public class User extends AbstractAuditingEntity<String> implements Serializable, Persistable<String> {
+public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String id;
+    private Long id;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
+
+    @JsonIgnore
+    @NotNull
+    @Size(min = 60, max = 60)
+    @Column("password_hash")
+    private String password;
 
     @Size(max = 50)
     @Column("first_name")
@@ -56,18 +62,28 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
     @Column("image_url")
     private String imageUrl;
 
+    @Size(max = 20)
+    @Column("activation_key")
+    @JsonIgnore
+    private String activationKey;
+
+    @Size(max = 20)
+    @Column("reset_key")
+    @JsonIgnore
+    private String resetKey;
+
+    @Column("reset_date")
+    private Instant resetDate = null;
+
     @JsonIgnore
     @Transient
     private Set<Authority> authorities = new HashSet<>();
 
-    @Transient
-    private boolean isPersisted;
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,6 +94,14 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
     // Lowercase the login before saving it in database
     public void setLogin(String login) {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -120,6 +144,30 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
         this.activated = activated;
     }
 
+    public String getActivationKey() {
+        return activationKey;
+    }
+
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
+    }
+
+    public String getResetKey() {
+        return resetKey;
+    }
+
+    public void setResetKey(String resetKey) {
+        this.resetKey = resetKey;
+    }
+
+    public Instant getResetDate() {
+        return resetDate;
+    }
+
+    public void setResetDate(Instant resetDate) {
+        this.resetDate = resetDate;
+    }
+
     public String getLangKey() {
         return langKey;
     }
@@ -134,16 +182,6 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
-    }
-
-    @Override
-    public boolean isNew() {
-        return !isPersisted;
-    }
-
-    public User setIsPersisted() {
-        this.isPersisted = true;
-        return this;
     }
 
     @Override
@@ -174,6 +212,7 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
+            ", activationKey='" + activationKey + '\'' +
             "}";
     }
 }

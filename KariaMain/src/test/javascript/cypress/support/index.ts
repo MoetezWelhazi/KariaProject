@@ -13,8 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+import './account';
 import './commands';
 import './navbar';
 import './entity';
 import './management';
-import './oauth2';

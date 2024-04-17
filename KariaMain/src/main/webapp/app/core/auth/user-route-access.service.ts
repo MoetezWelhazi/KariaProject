@@ -3,14 +3,12 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 import { map } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
-import { LoginService } from 'app/login/login.service';
 import { StateStorageService } from './state-storage.service';
 
 export const UserRouteAccessService: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const accountService = inject(AccountService);
   const router = inject(Router);
   const stateStorageService = inject(StateStorageService);
-  const loginService = inject(LoginService);
   return accountService.identity().pipe(
     map(account => {
       if (account) {
@@ -28,7 +26,7 @@ export const UserRouteAccessService: CanActivateFn = (next: ActivatedRouteSnapsh
       }
 
       stateStorageService.storeUrl(state.url);
-      loginService.login();
+      router.navigate(['/login']);
       return false;
     }),
   );

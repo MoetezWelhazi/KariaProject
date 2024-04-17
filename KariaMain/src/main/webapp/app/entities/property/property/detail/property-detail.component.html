@@ -43,18 +43,78 @@
           <dd>
             <span jhiTranslate="{{ 'kariaMainApp.Visibility.' + property.visibility }}">{{ property.visibility }}</span>
           </dd>
-          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image">Image</span></dt>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image1">Image 1</span></dt>
           <dd>
-            @if (property.image) {
+            @if (property.image1) {
               <div>
-                <a (click)="openFile(property.image, property.imageContentType)">
+                <a (click)="openFile(property.image1, property.image1ContentType)">
                   <img
-                    [src]="'data:' + property.imageContentType + ';base64,' + property.image"
+                    [src]="'data:' + property.image1ContentType + ';base64,' + property.image1"
                     style="max-width: 100%"
                     alt="property image"
                   />
                 </a>
-                {{ property.imageContentType }}, {{ byteSize(property.image) }}
+                {{ property.image1ContentType }}, {{ byteSize(property.image1) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image2">Image 2</span></dt>
+          <dd>
+            @if (property.image2) {
+              <div>
+                <a (click)="openFile(property.image2, property.image2ContentType)">
+                  <img
+                    [src]="'data:' + property.image2ContentType + ';base64,' + property.image2"
+                    style="max-width: 100%"
+                    alt="property image"
+                  />
+                </a>
+                {{ property.image2ContentType }}, {{ byteSize(property.image2) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image3">Image 3</span></dt>
+          <dd>
+            @if (property.image3) {
+              <div>
+                <a (click)="openFile(property.image3, property.image3ContentType)">
+                  <img
+                    [src]="'data:' + property.image3ContentType + ';base64,' + property.image3"
+                    style="max-width: 100%"
+                    alt="property image"
+                  />
+                </a>
+                {{ property.image3ContentType }}, {{ byteSize(property.image3) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image4">Image 4</span></dt>
+          <dd>
+            @if (property.image4) {
+              <div>
+                <a (click)="openFile(property.image4, property.image4ContentType)">
+                  <img
+                    [src]="'data:' + property.image4ContentType + ';base64,' + property.image4"
+                    style="max-width: 100%"
+                    alt="property image"
+                  />
+                </a>
+                {{ property.image4ContentType }}, {{ byteSize(property.image4) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kariaMainApp.propertyProperty.image5">Image 5</span></dt>
+          <dd>
+            @if (property.image5) {
+              <div>
+                <a (click)="openFile(property.image5, property.image5ContentType)">
+                  <img
+                    [src]="'data:' + property.image5ContentType + ';base64,' + property.image5"
+                    style="max-width: 100%"
+                    alt="property image"
+                  />
+                </a>
+                {{ property.image5ContentType }}, {{ byteSize(property.image5) }}
               </div>
             }
           </dd>

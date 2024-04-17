@@ -1,15 +1,13 @@
 package com.jhipster.demo.store.security;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.Jwt;
 import reactor.core.publisher.Mono;
 
 /**
@@ -17,7 +15,9 @@ import reactor.core.publisher.Mono;
  */
 public final class SecurityUtils {
 
-    public static final String CLAIMS_NAMESPACE = "https://www.jhipster.tech/";
+    public static final MacAlgorithm JWT_ALGORITHM = MacAlgorithm.HS512;
+
+    public static final String AUTHORITIES_KEY = "auth";
 
     private SecurityUtils() {}
 
@@ -38,17 +38,25 @@ public final class SecurityUtils {
             return null;
         } else if (authentication.getPrincipal() instanceof UserDetails springSecurityUser) {
             return springSecurityUser.getUsername();
-        } else if (authentication instanceof JwtAuthenticationToken) {
-            return (String) ((JwtAuthenticationToken) authentication).getToken().getClaims().get("preferred_username");
-        } else if (authentication.getPrincipal() instanceof DefaultOidcUser) {
-            Map<String, Object> attributes = ((DefaultOidcUser) authentication.getPrincipal()).getAttributes();
-            if (attributes.containsKey("preferred_username")) {
-                return (String) attributes.get("preferred_username");
-            }
+        } else if (authentication.getPrincipal() instanceof Jwt jwt) {
+            return jwt.getSubject();
         } else if (authentication.getPrincipal() instanceof String s) {
             return s;
         }
         return null;
+    }
+
+    /**
+     * Get the JWT of the current user.
+     *
+     * @return the JWT of the current user.
+     */
+    public static Mono<String> getCurrentUserJWT() {
+        return ReactiveSecurityContextHolder
+            .getContext()
+            .map(SecurityContext::getAuthentication)
+            .filter(authentication -> authentication.getCredentials() instanceof String)
+            .map(authentication -> (String) authentication.getCredentials());
     }
 
     /**
@@ -101,21 +109,5 @@ public final class SecurityUtils {
      */
     public static Mono<Boolean> hasCurrentUserThisAuthority(String authority) {
         return hasCurrentUserAnyOfAuthorities(authority);
-    }
-
-    public static List<GrantedAuthority> extractAuthorityFromClaims(Map<String, Object> claims) {
-        return mapRolesToGrantedAuthorities(getRolesFromClaims(claims));
-    }
-
-    @SuppressWarnings("unchecked")
-    private static Collection<String> getRolesFromClaims(Map<String, Object> claims) {
-        return (Collection<String>) claims.getOrDefault(
-            "groups",
-            claims.getOrDefault("roles", claims.getOrDefault(CLAIMS_NAMESPACE + "roles", new ArrayList<>()))
-        );
-    }
-
-    private static List<GrantedAuthority> mapRolesToGrantedAuthorities(Collection<String> roles) {
-        return roles.stream().filter(role -> role.startsWith("ROLE_")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 }

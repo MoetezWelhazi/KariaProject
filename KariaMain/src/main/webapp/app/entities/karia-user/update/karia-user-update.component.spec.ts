@@ -51,10 +51,10 @@ describe('KariaUser Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call User query and add missing value', () => {
       const kariaUser: IKariaUser = { id: 456 };
-      const user: IUser = { id: '0c09ac78-c8fe-464b-aeb8-a8fda7d9af87' };
+      const user: IUser = { id: 29057 };
       kariaUser.user = user;
 
-      const userCollection: IUser[] = [{ id: 'd0814e40-b524-4742-ac63-71bc18a929da' }];
+      const userCollection: IUser[] = [{ id: 26865 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [user];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -73,7 +73,7 @@ describe('KariaUser Management Update Component', () => {
 
     it('Should update editForm', () => {
       const kariaUser: IKariaUser = { id: 456 };
-      const user: IUser = { id: '872ce63b-435d-4e5b-ad06-8c9df55ba51c' };
+      const user: IUser = { id: 28515 };
       kariaUser.user = user;
 
       activatedRoute.data = of({ kariaUser });
@@ -155,8 +155,8 @@ describe('KariaUser Management Update Component', () => {
   describe('Compare relationships', () => {
     describe('compareUser', () => {
       it('Should forward to userService', () => {
-        const entity = { id: 'ABC' };
-        const entity2 = { id: 'CBA' };
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
         jest.spyOn(userService, 'compareUser');
         comp.compareUser(entity, entity2);
         expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);

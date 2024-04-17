@@ -68,7 +68,7 @@ public class KariaUser implements Serializable {
     private User user;
 
     @Column("user_id")
-    private String userId;
+    private Long userId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -242,11 +242,11 @@ public class KariaUser implements Serializable {
         return this;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setUserId(String user) {
+    public void setUserId(Long user) {
         this.userId = user;
     }
 

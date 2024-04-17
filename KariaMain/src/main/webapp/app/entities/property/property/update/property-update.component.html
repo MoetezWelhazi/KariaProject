@@ -100,21 +100,23 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image" for="field_image">Image</label>
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image1" for="field_image1">Image 1</label>
           <div>
-            @if (editForm.get('image')!.value) {
+            @if (editForm.get('image1')!.value) {
               <img
-                [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value"
+                [src]="'data:' + editForm.get('image1ContentType')!.value + ';base64,' + editForm.get('image1')!.value"
                 style="max-height: 100px"
                 alt="property image"
               />
             }
-            @if (editForm.get('image')!.value) {
+            @if (editForm.get('image1')!.value) {
               <div class="form-text text-danger clearfix">
-                <span class="pull-start">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value!) }}</span>
+                <span class="pull-start"
+                  >{{ editForm.get('image1ContentType')!.value }}, {{ byteSize(editForm.get('image1')!.value!) }}</span
+                >
                 <button
                   type="button"
-                  (click)="clearInputImage('image', 'imageContentType', 'file_image')"
+                  (click)="clearInputImage('image1', 'image1ContentType', 'file_image1')"
                   class="btn btn-secondary btn-xs pull-end"
                 >
                   <fa-icon icon="times"></fa-icon>
@@ -123,20 +125,192 @@
             }
             <input
               type="file"
-              id="file_image"
-              data-cy="image"
-              (change)="setFileData($event, 'image', true)"
+              id="file_image1"
+              data-cy="image1"
+              (change)="setFileData($event, 'image1', true)"
               accept="image/*"
               jhiTranslate="entity.action.addimage"
             />
           </div>
-          <input type="hidden" class="form-control" name="image" id="field_image" data-cy="image" formControlName="image" />
+          <input type="hidden" class="form-control" name="image1" id="field_image1" data-cy="image1" formControlName="image1" />
           <input
             type="hidden"
             class="form-control"
-            name="imageContentType"
-            id="field_imageContentType"
-            formControlName="imageContentType"
+            name="image1ContentType"
+            id="field_image1ContentType"
+            formControlName="image1ContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image2" for="field_image2">Image 2</label>
+          <div>
+            @if (editForm.get('image2')!.value) {
+              <img
+                [src]="'data:' + editForm.get('image2ContentType')!.value + ';base64,' + editForm.get('image2')!.value"
+                style="max-height: 100px"
+                alt="property image"
+              />
+            }
+            @if (editForm.get('image2')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('image2ContentType')!.value }}, {{ byteSize(editForm.get('image2')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('image2', 'image2ContentType', 'file_image2')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_image2"
+              data-cy="image2"
+              (change)="setFileData($event, 'image2', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="image2" id="field_image2" data-cy="image2" formControlName="image2" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="image2ContentType"
+            id="field_image2ContentType"
+            formControlName="image2ContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image3" for="field_image3">Image 3</label>
+          <div>
+            @if (editForm.get('image3')!.value) {
+              <img
+                [src]="'data:' + editForm.get('image3ContentType')!.value + ';base64,' + editForm.get('image3')!.value"
+                style="max-height: 100px"
+                alt="property image"
+              />
+            }
+            @if (editForm.get('image3')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('image3ContentType')!.value }}, {{ byteSize(editForm.get('image3')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('image3', 'image3ContentType', 'file_image3')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_image3"
+              data-cy="image3"
+              (change)="setFileData($event, 'image3', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="image3" id="field_image3" data-cy="image3" formControlName="image3" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="image3ContentType"
+            id="field_image3ContentType"
+            formControlName="image3ContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image4" for="field_image4">Image 4</label>
+          <div>
+            @if (editForm.get('image4')!.value) {
+              <img
+                [src]="'data:' + editForm.get('image4ContentType')!.value + ';base64,' + editForm.get('image4')!.value"
+                style="max-height: 100px"
+                alt="property image"
+              />
+            }
+            @if (editForm.get('image4')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('image4ContentType')!.value }}, {{ byteSize(editForm.get('image4')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('image4', 'image4ContentType', 'file_image4')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_image4"
+              data-cy="image4"
+              (change)="setFileData($event, 'image4', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="image4" id="field_image4" data-cy="image4" formControlName="image4" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="image4ContentType"
+            id="field_image4ContentType"
+            formControlName="image4ContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="kariaMainApp.propertyProperty.image5" for="field_image5">Image 5</label>
+          <div>
+            @if (editForm.get('image5')!.value) {
+              <img
+                [src]="'data:' + editForm.get('image5ContentType')!.value + ';base64,' + editForm.get('image5')!.value"
+                style="max-height: 100px"
+                alt="property image"
+              />
+            }
+            @if (editForm.get('image5')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('image5ContentType')!.value }}, {{ byteSize(editForm.get('image5')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('image5', 'image5ContentType', 'file_image5')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_image5"
+              data-cy="image5"
+              (change)="setFileData($event, 'image5', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="image5" id="field_image5" data-cy="image5" formControlName="image5" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="image5ContentType"
+            id="field_image5ContentType"
+            formControlName="image5ContentType"
           />
         </div>
 

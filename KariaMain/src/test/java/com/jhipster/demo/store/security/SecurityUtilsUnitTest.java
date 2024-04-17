@@ -2,7 +2,8 @@ package com.jhipster.demo.store.security;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +23,15 @@ class SecurityUtilsUnitTest {
             .contextWrite(ReactiveSecurityContextHolder.withAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin")))
             .block();
         assertThat(login).isEqualTo("admin");
+    }
+
+    @Test
+    void testgetCurrentUserJWT() {
+        String jwt = SecurityUtils
+            .getCurrentUserJWT()
+            .contextWrite(ReactiveSecurityContextHolder.withAuthentication(new UsernamePasswordAuthenticationToken("admin", "token")))
+            .block();
+        assertThat(jwt).isEqualTo("token");
     }
 
     @Test

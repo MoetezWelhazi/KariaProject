@@ -3,11 +3,14 @@ package com.jhipster.demo.store.web.rest;
 import com.jhipster.demo.store.service.UserService;
 import com.jhipster.demo.store.service.dto.UserDTO;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,10 @@ import tech.jhipster.web.util.PaginationUtil;
 @RestController
 @RequestMapping("/api")
 public class PublicUserResource {
+
+    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
+        Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
+    );
 
     private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
 
@@ -41,6 +48,9 @@ public class PublicUserResource {
         @org.springdoc.core.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get all public User names");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return Mono.just(ResponseEntity.badRequest().build());
+        }
 
         return userService
             .countManagedUsers()
@@ -52,6 +62,10 @@ public class PublicUserResource {
                 )
             )
             .map(headers -> ResponseEntity.ok().headers(headers).body(userService.getAllPublicUsers(pageable)));
+    }
+
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 
     /**

@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240204111223"
+    "changelogDate": "20240417193856"
   },
   "applications": ["KariaMain", "property"],
   "clientRootFolder": "property",

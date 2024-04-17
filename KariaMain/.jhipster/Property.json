@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240204111023"
+    "changelogDate": "20240417193656"
   },
   "applications": ["KariaMain", "property"],
   "clientRootFolder": "property",
@@ -43,7 +43,27 @@
       "fieldValues": "PUBLIC,PRIVATE"
     },
     {
-      "fieldName": "image",
+      "fieldName": "image1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "image2",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "image3",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "image4",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "image5",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
     }
