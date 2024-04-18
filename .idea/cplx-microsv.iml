@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/KariaMain/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/KariaMain/target" />
+      <excludeFolder url="file://$MODULE_DIR$/cplx-front" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
