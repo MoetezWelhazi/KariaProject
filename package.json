@@ -1,0 +1,39 @@
+{
+  "workspaces": {
+    "packages": [
+      "KariaMain",
+      "property",
+      "notification"
+    ]
+  },
+  "scripts": {
+    "backend:build-cache": "concurrently npm:backend:build-cache:KariaMain npm:backend:build-cache:property npm:backend:build-cache:notification",
+    "backend:build-cache:KariaMain": "npm run backend:build-cache --workspace KariaMain --if-present",
+    "backend:build-cache:notification": "npm run backend:build-cache --workspace notification --if-present",
+    "backend:build-cache:property": "npm run backend:build-cache --workspace property --if-present",
+    "ci:backend:test": "npm run ci:backend:test --workspaces --if-present",
+    "ci:e2e:package": "npm run ci:docker:build --workspaces --if-present && npm run java:docker --workspaces --if-present",
+    "ci:e2e:run": "npm run e2e:headless --workspaces --if-present",
+    "ci:frontend:test": "npm run ci:frontend:test --workspaces --if-present",
+    "java:docker": "concurrently npm:java:docker:KariaMain npm:java:docker:property npm:java:docker:notification",
+    "java:docker:KariaMain": "npm run java:docker --workspace KariaMain --if-present",
+    "java:docker:arm64": "concurrently npm:java:docker:arm64:KariaMain npm:java:docker:arm64:property npm:java:docker:arm64:notification",
+    "java:docker:arm64:KariaMain": "npm run java:docker:arm64 --workspace KariaMain --if-present",
+    "java:docker:arm64:notification": "npm run java:docker:arm64 --workspace notification --if-present",
+    "java:docker:arm64:property": "npm run java:docker:arm64 --workspace property --if-present",
+    "java:docker:notification": "npm run java:docker --workspace notification --if-present",
+    "java:docker:property": "npm run java:docker --workspace property --if-present",
+    "watch": "concurrently npm:watch:KariaMain npm:watch:property npm:watch:notification",
+    "watch:KariaMain": "npm run watch --workspace KariaMain --if-present",
+    "watch:notification": "npm run watch --workspace notification --if-present",
+    "watch:property": "npm run watch --workspace property --if-present",
+    "webapp:test": "npm run webapp:test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "8.2.2",
+    "rxjs": "7.8.1"
+  },
+  "overrides": {
+    "webpack": "5.89.0"
+  }
+}

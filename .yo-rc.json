@@ -1,0 +1,9 @@
+{
+  "generator-jhipster": {
+    "appsFolders": ["KariaMain", "property", "notification"],
+    "baseName": "workspaces",
+    "clientPackageManager": "npm",
+    "directoryPath": "./",
+    "jhipsterVersion": "8.1.0"
+  }
+}
