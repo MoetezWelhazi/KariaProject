@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240417193656"
+  },
+  "applications": ["KariaMain", "property"],
+  "clientRootFolder": "property",
+  "databaseType": "sql",
+  "entityTableName": "tag",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "property",
+  "name": "Tag",
+  "relationships": [
+    {
+      "otherEntityName": "property",
+      "otherEntityRelationshipName": "tags",
+      "relationshipName": "properties",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
