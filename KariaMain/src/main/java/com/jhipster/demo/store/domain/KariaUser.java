@@ -2,6 +2,7 @@ package com.jhipster.demo.store.domain;
 
 import com.jhipster.demo.store.domain.enumeration.Gender;
 import com.jhipster.demo.store.domain.enumeration.RoleEnum;
+import jakarta.persistence.MapsId;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
@@ -65,6 +66,7 @@ public class KariaUser implements Serializable {
     private String avatarContentType;
 
     @Transient
+    @MapsId
     private User user;
 
     @Column("user_id")
