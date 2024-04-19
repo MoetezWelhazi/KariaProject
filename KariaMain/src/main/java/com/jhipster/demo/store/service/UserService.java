@@ -2,8 +2,12 @@ package com.jhipster.demo.store.service;
 
 import com.jhipster.demo.store.config.Constants;
 import com.jhipster.demo.store.domain.Authority;
+import com.jhipster.demo.store.domain.KariaUser;
 import com.jhipster.demo.store.domain.User;
+import com.jhipster.demo.store.domain.enumeration.Gender;
+import com.jhipster.demo.store.domain.enumeration.RoleEnum;
 import com.jhipster.demo.store.repository.AuthorityRepository;
+import com.jhipster.demo.store.repository.KariaUserRepository;
 import com.jhipster.demo.store.repository.UserRepository;
 import com.jhipster.demo.store.security.AuthoritiesConstants;
 import com.jhipster.demo.store.security.SecurityUtils;
@@ -40,10 +44,13 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+    private final KariaUserService kariaUserService;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, KariaUserService kariaUserService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.kariaUserService = kariaUserService;
     }
 
     @Transactional
@@ -91,7 +98,7 @@ public class UserService {
     }
 
     @Transactional
-    public Mono<User> registerUser(AdminUserDTO userDTO, String password) {
+    public Mono<User> registerUser(AdminUserDTO userDTO, String password, String phoneNumber) {
         return userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .flatMap(existingUser -> {
@@ -128,6 +135,19 @@ public class UserService {
                     newUser.setActivated(false);
                     // new user gets registration key
                     newUser.setActivationKey(RandomUtil.generateActivationKey());
+                    // create and save the KariaUser entity
+                    KariaUser kariaUser = new KariaUser();
+                    kariaUser.setUser(newUser);
+                    kariaUser.setPhone(phoneNumber);
+                    kariaUser.setRole(RoleEnum.RENTEE);
+                    kariaUser.setFirstName(newUser.getFirstName());
+                    kariaUser.setLastName(newUser.getLastName());
+                    kariaUser.setEmail(newUser.getEmail());
+                    kariaUser.setAddressLine1("");
+                    kariaUser.setGender(Gender.OTHER);
+                    kariaUser.setCity("NaN");
+                    this.kariaUserService.save(kariaUser);
+
                     return newUser;
                 })
             )

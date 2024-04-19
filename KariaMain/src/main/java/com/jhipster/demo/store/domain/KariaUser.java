@@ -69,8 +69,6 @@ public class KariaUser implements Serializable {
     @MapsId
     private User user;
 
-    @Column("user_id")
-    private Long userId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -236,20 +234,11 @@ public class KariaUser implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-        this.userId = user != null ? user.getId() : null;
     }
 
     public KariaUser user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(Long user) {
-        this.userId = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
