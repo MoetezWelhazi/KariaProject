@@ -2,6 +2,8 @@ package com.jhipster.demo.store.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jhipster.demo.store.config.Constants;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -24,7 +26,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
 
@@ -52,7 +54,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     private String email;
 
     @NotNull
-    private boolean activated = false;
+    private boolean activated = true;
 
     @Size(min = 2, max = 10)
     @Column("lang_key")

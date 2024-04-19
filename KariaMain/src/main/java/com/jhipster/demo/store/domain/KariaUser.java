@@ -2,7 +2,10 @@ package com.jhipster.demo.store.domain;
 
 import com.jhipster.demo.store.domain.enumeration.Gender;
 import com.jhipster.demo.store.domain.enumeration.RoleEnum;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
@@ -18,6 +21,8 @@ import org.springframework.data.relational.core.mapping.Table;
 public class KariaUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private Long userId;
 
     @Id
     @Column("id")
@@ -65,9 +70,6 @@ public class KariaUser implements Serializable {
     @Column("avatar_content_type")
     private String avatarContentType;
 
-    @Transient
-    @MapsId
-    private User user;
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -228,16 +230,16 @@ public class KariaUser implements Serializable {
         this.avatarContentType = avatarContentType;
     }
 
-    public User getUser() {
-        return this.user;
+    public Long getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Long userId) {
+        this.userId = userId;
     }
 
-    public KariaUser user(User user) {
-        this.setUser(user);
+    public KariaUser user(Long userId) {
+        this.setUser(userId);
         return this;
     }
 

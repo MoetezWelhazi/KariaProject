@@ -115,7 +115,7 @@ class KariaUserResourceIT {
             .avatarContentType(DEFAULT_AVATAR_CONTENT_TYPE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
-        kariaUser.setUser(user);
+        kariaUser.setUser(user != null ? user.getId() : null);
         return kariaUser;
     }
 
@@ -140,7 +140,7 @@ class KariaUserResourceIT {
             .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
-        kariaUser.setUser(user);
+        kariaUser.setUser(user!=null ? user.getId() : null);
         return kariaUser;
     }
 

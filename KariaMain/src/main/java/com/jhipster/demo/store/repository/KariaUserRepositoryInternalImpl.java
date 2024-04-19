@@ -109,7 +109,6 @@ class KariaUserRepositoryInternalImpl extends SimpleR2dbcRepository<KariaUser, L
 
     private KariaUser process(Row row, RowMetadata metadata) {
         KariaUser entity = kariauserMapper.apply(row, "e");
-        entity.setUser(userMapper.apply(row, "user"));
         return entity;
     }
 
