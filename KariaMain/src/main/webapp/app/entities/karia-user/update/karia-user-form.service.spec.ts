@@ -29,7 +29,6 @@ describe('KariaUser Form Service', () => {
             addressLine2: expect.any(Object),
             city: expect.any(Object),
             role: expect.any(Object),
-            avatar: expect.any(Object),
             user: expect.any(Object),
           }),
         );
@@ -50,7 +49,6 @@ describe('KariaUser Form Service', () => {
             addressLine2: expect.any(Object),
             city: expect.any(Object),
             role: expect.any(Object),
-            avatar: expect.any(Object),
             user: expect.any(Object),
           }),
         );

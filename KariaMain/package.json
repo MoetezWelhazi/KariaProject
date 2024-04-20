@@ -27,7 +27,7 @@
     "ci:e2e:teardown:docker": "docker compose -f src/main/docker/services.yml down -v && docker ps -a",
     "ci:frontend:build": "npm run webapp:build:$npm_package_config_default_environment",
     "ci:frontend:test": "npm run ci:frontend:build && npm test",
-    "ci:server:await": "echo \"Waiting for services to start\" && npm run ci:server:await:property && npm run ci:server:await:notification && npm run ci:server:await:kariamain && echo \"Services started\"",
+    "ci:server:await": "echo \"Waiting for services to start\" && npm run ci:server:await:kariamain && echo \"Services started\"",
     "ci:server:await:kariamain": "wait-on -t 180000 http-get://127.0.0.1:$npm_package_config_backend_port/management/health",
     "ci:server:await:notification": "wait-on -t 180000 http-get://127.0.0.1:8080/services/notification/management/health/readiness",
     "ci:server:await:property": "wait-on -t 180000 http-get://127.0.0.1:8080/services/property/management/health/readiness",

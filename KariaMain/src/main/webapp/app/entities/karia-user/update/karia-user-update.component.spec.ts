@@ -51,10 +51,10 @@ describe('KariaUser Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call User query and add missing value', () => {
       const kariaUser: IKariaUser = { id: 456 };
-      const user: IUser = { id: 29057 };
+      const user: IUser = { id: 15077 };
       kariaUser.user = user;
 
-      const userCollection: IUser[] = [{ id: 26865 }];
+      const userCollection: IUser[] = [{ id: 18948 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [user];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -73,7 +73,7 @@ describe('KariaUser Management Update Component', () => {
 
     it('Should update editForm', () => {
       const kariaUser: IKariaUser = { id: 456 };
-      const user: IUser = { id: 28515 };
+      const user: IUser = { id: 23777 };
       kariaUser.user = user;
 
       activatedRoute.data = of({ kariaUser });

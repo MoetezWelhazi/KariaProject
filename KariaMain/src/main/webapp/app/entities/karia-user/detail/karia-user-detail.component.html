@@ -51,21 +51,6 @@
           <dd>
             <span jhiTranslate="{{ 'kariaMainApp.RoleEnum.' + kariaUser.role }}">{{ kariaUser.role }}</span>
           </dd>
-          <dt><span jhiTranslate="kariaMainApp.kariaUser.avatar">Avatar</span></dt>
-          <dd>
-            @if (kariaUser.avatar) {
-              <div>
-                <a (click)="openFile(kariaUser.avatar, kariaUser.avatarContentType)">
-                  <img
-                    [src]="'data:' + kariaUser.avatarContentType + ';base64,' + kariaUser.avatar"
-                    style="max-width: 100%"
-                    alt="kariaUser image"
-                  />
-                </a>
-                {{ kariaUser.avatarContentType }}, {{ byteSize(kariaUser.avatar) }}
-              </div>
-            }
-          </dd>
           <dt><span jhiTranslate="kariaMainApp.kariaUser.user">User</span></dt>
           <dd>
             <span>{{ kariaUser.user?.login }}</span>

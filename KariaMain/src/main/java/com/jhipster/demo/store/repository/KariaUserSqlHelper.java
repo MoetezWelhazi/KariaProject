@@ -20,8 +20,6 @@ public class KariaUserSqlHelper {
         columns.add(Column.aliased("address_line_2", table, columnPrefix + "_address_line_2"));
         columns.add(Column.aliased("city", table, columnPrefix + "_city"));
         columns.add(Column.aliased("role", table, columnPrefix + "_role"));
-        columns.add(Column.aliased("avatar", table, columnPrefix + "_avatar"));
-        columns.add(Column.aliased("avatar_content_type", table, columnPrefix + "_avatar_content_type"));
 
         columns.add(Column.aliased("user_id", table, columnPrefix + "_user_id"));
         return columns;

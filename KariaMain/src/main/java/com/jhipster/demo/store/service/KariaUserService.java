@@ -86,12 +86,6 @@ public class KariaUserService {
                 if (kariaUser.getRole() != null) {
                     existingKariaUser.setRole(kariaUser.getRole());
                 }
-                if (kariaUser.getAvatar() != null) {
-                    existingKariaUser.setAvatar(kariaUser.getAvatar());
-                }
-                if (kariaUser.getAvatarContentType() != null) {
-                    existingKariaUser.setAvatarContentType(kariaUser.getAvatarContentType());
-                }
 
                 return existingKariaUser;
             })

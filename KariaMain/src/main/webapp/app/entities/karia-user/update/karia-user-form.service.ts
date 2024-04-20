@@ -27,8 +27,6 @@ type KariaUserFormGroupContent = {
   addressLine2: FormControl<IKariaUser['addressLine2']>;
   city: FormControl<IKariaUser['city']>;
   role: FormControl<IKariaUser['role']>;
-  avatar: FormControl<IKariaUser['avatar']>;
-  avatarContentType: FormControl<IKariaUser['avatarContentType']>;
   user: FormControl<IKariaUser['user']>;
 };
 
@@ -55,9 +53,7 @@ export class KariaUserFormService {
       lastName: new FormControl(kariaUserRawValue.lastName, {
         validators: [Validators.required],
       }),
-      gender: new FormControl(kariaUserRawValue.gender, {
-        validators: [Validators.required],
-      }),
+      gender: new FormControl(kariaUserRawValue.gender),
       email: new FormControl(kariaUserRawValue.email, {
         validators: [Validators.required, Validators.pattern('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')],
       }),
@@ -74,8 +70,6 @@ export class KariaUserFormService {
       role: new FormControl(kariaUserRawValue.role, {
         validators: [Validators.required],
       }),
-      avatar: new FormControl(kariaUserRawValue.avatar),
-      avatarContentType: new FormControl(kariaUserRawValue.avatarContentType),
       user: new FormControl(kariaUserRawValue.user, {
         validators: [Validators.required],
       }),

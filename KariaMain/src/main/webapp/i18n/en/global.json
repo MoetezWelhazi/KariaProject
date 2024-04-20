@@ -8,11 +8,7 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "kariaUser": "Karia User",
-        "propertyProperty": "Property",
-        "propertyTag": "Tag",
-        "propertyReview": "Review",
-        "notificationNotification": "Notification"
+        "kariaUser": "Karia User"
       },
       "account": {
         "main": "Account",

@@ -2,7 +2,7 @@
   "annotations": {
     "changelogDate": "20240417193556"
   },
-  "applications": ["KariaMain"],
+  "applications": "*",
   "databaseType": "sql",
   "entityTableName": "karia_user",
   "fields": [
@@ -19,7 +19,6 @@
     {
       "fieldName": "gender",
       "fieldType": "Gender",
-      "fieldValidateRules": ["required"],
       "fieldValues": "MALE,FEMALE,OTHER"
     },
     {
@@ -52,11 +51,6 @@
       "fieldType": "RoleEnum",
       "fieldValidateRules": ["required"],
       "fieldValues": "RENTEE,RENTOR"
-    },
-    {
-      "fieldName": "avatar",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
     }
   ],
   "name": "KariaUser",

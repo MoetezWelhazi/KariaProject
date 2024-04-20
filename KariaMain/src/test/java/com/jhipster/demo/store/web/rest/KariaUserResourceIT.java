@@ -13,7 +13,6 @@ import com.jhipster.demo.store.domain.enumeration.RoleEnum;
 import com.jhipster.demo.store.repository.EntityManager;
 import com.jhipster.demo.store.repository.KariaUserRepository;
 import com.jhipster.demo.store.service.KariaUserService;
-import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -48,8 +47,8 @@ class KariaUserResourceIT {
     private static final Gender DEFAULT_GENDER = Gender.MALE;
     private static final Gender UPDATED_GENDER = Gender.FEMALE;
 
-    private static final String DEFAULT_EMAIL = "6Pa4>i@(a.6&Xo>";
-    private static final String UPDATED_EMAIL = "+uhL$?@fXBRl9.]";
+    private static final String DEFAULT_EMAIL = "^)*Y@1A.;VKerS";
+    private static final String UPDATED_EMAIL = "n%Y\\@#aG.Ss5DP=";
 
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
@@ -65,11 +64,6 @@ class KariaUserResourceIT {
 
     private static final RoleEnum DEFAULT_ROLE = RoleEnum.RENTEE;
     private static final RoleEnum UPDATED_ROLE = RoleEnum.RENTOR;
-
-    private static final byte[] DEFAULT_AVATAR = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_AVATAR = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_AVATAR_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_AVATAR_CONTENT_TYPE = "image/png";
 
     private static final String ENTITY_API_URL = "/api/karia-users";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -110,9 +104,7 @@ class KariaUserResourceIT {
             .addressLine1(DEFAULT_ADDRESS_LINE_1)
             .addressLine2(DEFAULT_ADDRESS_LINE_2)
             .city(DEFAULT_CITY)
-            .role(DEFAULT_ROLE)
-            .avatar(DEFAULT_AVATAR)
-            .avatarContentType(DEFAULT_AVATAR_CONTENT_TYPE);
+            .role(DEFAULT_ROLE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
         kariaUser.setUser(user);
@@ -135,9 +127,7 @@ class KariaUserResourceIT {
             .addressLine1(UPDATED_ADDRESS_LINE_1)
             .addressLine2(UPDATED_ADDRESS_LINE_2)
             .city(UPDATED_CITY)
-            .role(UPDATED_ROLE)
-            .avatar(UPDATED_AVATAR)
-            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
+            .role(UPDATED_ROLE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
         kariaUser.setUser(user);
@@ -190,8 +180,6 @@ class KariaUserResourceIT {
         assertThat(testKariaUser.getAddressLine2()).isEqualTo(DEFAULT_ADDRESS_LINE_2);
         assertThat(testKariaUser.getCity()).isEqualTo(DEFAULT_CITY);
         assertThat(testKariaUser.getRole()).isEqualTo(DEFAULT_ROLE);
-        assertThat(testKariaUser.getAvatar()).isEqualTo(DEFAULT_AVATAR);
-        assertThat(testKariaUser.getAvatarContentType()).isEqualTo(DEFAULT_AVATAR_CONTENT_TYPE);
     }
 
     @Test
@@ -242,27 +230,6 @@ class KariaUserResourceIT {
         int databaseSizeBeforeTest = kariaUserRepository.findAll().collectList().block().size();
         // set the field null
         kariaUser.setLastName(null);
-
-        // Create the KariaUser, which fails.
-
-        webTestClient
-            .post()
-            .uri(ENTITY_API_URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(TestUtil.convertObjectToJsonBytes(kariaUser))
-            .exchange()
-            .expectStatus()
-            .isBadRequest();
-
-        List<KariaUser> kariaUserList = kariaUserRepository.findAll().collectList().block();
-        assertThat(kariaUserList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    void checkGenderIsRequired() throws Exception {
-        int databaseSizeBeforeTest = kariaUserRepository.findAll().collectList().block().size();
-        // set the field null
-        kariaUser.setGender(null);
 
         // Create the KariaUser, which fails.
 
@@ -419,11 +386,7 @@ class KariaUserResourceIT {
             .jsonPath("$.[*].city")
             .value(hasItem(DEFAULT_CITY))
             .jsonPath("$.[*].role")
-            .value(hasItem(DEFAULT_ROLE.toString()))
-            .jsonPath("$.[*].avatarContentType")
-            .value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE))
-            .jsonPath("$.[*].avatar")
-            .value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_AVATAR)));
+            .value(hasItem(DEFAULT_ROLE.toString()));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -478,11 +441,7 @@ class KariaUserResourceIT {
             .jsonPath("$.city")
             .value(is(DEFAULT_CITY))
             .jsonPath("$.role")
-            .value(is(DEFAULT_ROLE.toString()))
-            .jsonPath("$.avatarContentType")
-            .value(is(DEFAULT_AVATAR_CONTENT_TYPE))
-            .jsonPath("$.avatar")
-            .value(is(Base64.getEncoder().encodeToString(DEFAULT_AVATAR)));
+            .value(is(DEFAULT_ROLE.toString()));
     }
 
     @Test
@@ -515,9 +474,7 @@ class KariaUserResourceIT {
             .addressLine1(UPDATED_ADDRESS_LINE_1)
             .addressLine2(UPDATED_ADDRESS_LINE_2)
             .city(UPDATED_CITY)
-            .role(UPDATED_ROLE)
-            .avatar(UPDATED_AVATAR)
-            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
+            .role(UPDATED_ROLE);
 
         webTestClient
             .put()
@@ -541,8 +498,6 @@ class KariaUserResourceIT {
         assertThat(testKariaUser.getAddressLine2()).isEqualTo(UPDATED_ADDRESS_LINE_2);
         assertThat(testKariaUser.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testKariaUser.getRole()).isEqualTo(UPDATED_ROLE);
-        assertThat(testKariaUser.getAvatar()).isEqualTo(UPDATED_AVATAR);
-        assertThat(testKariaUser.getAvatarContentType()).isEqualTo(UPDATED_AVATAR_CONTENT_TYPE);
     }
 
     @Test
@@ -618,11 +573,9 @@ class KariaUserResourceIT {
 
         partialUpdatedKariaUser
             .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME)
             .email(UPDATED_EMAIL)
-            .phone(UPDATED_PHONE)
-            .addressLine2(UPDATED_ADDRESS_LINE_2)
-            .city(UPDATED_CITY)
-            .role(UPDATED_ROLE);
+            .addressLine2(UPDATED_ADDRESS_LINE_2);
 
         webTestClient
             .patch()
@@ -638,16 +591,14 @@ class KariaUserResourceIT {
         assertThat(kariaUserList).hasSize(databaseSizeBeforeUpdate);
         KariaUser testKariaUser = kariaUserList.get(kariaUserList.size() - 1);
         assertThat(testKariaUser.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
-        assertThat(testKariaUser.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
+        assertThat(testKariaUser.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testKariaUser.getGender()).isEqualTo(DEFAULT_GENDER);
         assertThat(testKariaUser.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testKariaUser.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testKariaUser.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testKariaUser.getAddressLine1()).isEqualTo(DEFAULT_ADDRESS_LINE_1);
         assertThat(testKariaUser.getAddressLine2()).isEqualTo(UPDATED_ADDRESS_LINE_2);
-        assertThat(testKariaUser.getCity()).isEqualTo(UPDATED_CITY);
-        assertThat(testKariaUser.getRole()).isEqualTo(UPDATED_ROLE);
-        assertThat(testKariaUser.getAvatar()).isEqualTo(DEFAULT_AVATAR);
-        assertThat(testKariaUser.getAvatarContentType()).isEqualTo(DEFAULT_AVATAR_CONTENT_TYPE);
+        assertThat(testKariaUser.getCity()).isEqualTo(DEFAULT_CITY);
+        assertThat(testKariaUser.getRole()).isEqualTo(DEFAULT_ROLE);
     }
 
     @Test
@@ -670,9 +621,7 @@ class KariaUserResourceIT {
             .addressLine1(UPDATED_ADDRESS_LINE_1)
             .addressLine2(UPDATED_ADDRESS_LINE_2)
             .city(UPDATED_CITY)
-            .role(UPDATED_ROLE)
-            .avatar(UPDATED_AVATAR)
-            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
+            .role(UPDATED_ROLE);
 
         webTestClient
             .patch()
@@ -696,8 +645,6 @@ class KariaUserResourceIT {
         assertThat(testKariaUser.getAddressLine2()).isEqualTo(UPDATED_ADDRESS_LINE_2);
         assertThat(testKariaUser.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testKariaUser.getRole()).isEqualTo(UPDATED_ROLE);
-        assertThat(testKariaUser.getAvatar()).isEqualTo(UPDATED_AVATAR);
-        assertThat(testKariaUser.getAvatarContentType()).isEqualTo(UPDATED_AVATAR_CONTENT_TYPE);
     }
 
     @Test

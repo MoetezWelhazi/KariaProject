@@ -15,7 +15,7 @@ describe('KariaUser e2e test', () => {
   const kariaUserPageUrlPattern = new RegExp('/karia-user(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  // const kariaUserSample = {"firstName":"Emily","lastName":"Gottlieb","gender":"OTHER","email":"z@|(J.RS)V","phone":"498-757-8677","addressLine1":"aboard since","city":"Bergstromport","role":"RENTEE"};
+  // const kariaUserSample = {"firstName":"David","lastName":"Sporer","email":"|@OK.E~78","phone":"676.299.0334 x0746","addressLine1":"qua jubilantly phew","city":"West Wallacestad","role":"RENTOR"};
 
   let kariaUser;
   // let user;
@@ -30,7 +30,7 @@ describe('KariaUser e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/users',
-      body: {"login":"beyond","firstName":"Blanche","lastName":"Robel"},
+      body: {"login":"mature slither","firstName":"Harvey","lastName":"Smith"},
     }).then(({ body }) => {
       user = body;
     });
@@ -213,37 +213,33 @@ describe('KariaUser e2e test', () => {
     });
 
     it.skip('should create an instance of KariaUser', () => {
-      cy.get(`[data-cy="firstName"]`).type('Bruce');
-      cy.get(`[data-cy="firstName"]`).should('have.value', 'Bruce');
+      cy.get(`[data-cy="firstName"]`).type('Madeline');
+      cy.get(`[data-cy="firstName"]`).should('have.value', 'Madeline');
 
-      cy.get(`[data-cy="lastName"]`).type('Rolfson');
-      cy.get(`[data-cy="lastName"]`).should('have.value', 'Rolfson');
+      cy.get(`[data-cy="lastName"]`).type('Homenick');
+      cy.get(`[data-cy="lastName"]`).should('have.value', 'Homenick');
 
       cy.get(`[data-cy="gender"]`).select('OTHER');
 
-      cy.get(`[data-cy="email"]`).type('cL9fe@Vq<K._PMu');
-      cy.get(`[data-cy="email"]`).should('have.value', 'cL9fe@Vq<K._PMu');
+      cy.get(`[data-cy="email"]`).type('r@+8.X');
+      cy.get(`[data-cy="email"]`).should('have.value', 'r@+8.X');
 
-      cy.get(`[data-cy="phone"]`).type('1-882-287-4720 x66645');
-      cy.get(`[data-cy="phone"]`).should('have.value', '1-882-287-4720 x66645');
+      cy.get(`[data-cy="phone"]`).type('707.415.3013');
+      cy.get(`[data-cy="phone"]`).should('have.value', '707.415.3013');
 
-      cy.get(`[data-cy="addressLine1"]`).type('despite');
-      cy.get(`[data-cy="addressLine1"]`).should('have.value', 'despite');
+      cy.get(`[data-cy="addressLine1"]`).type('short-term rigid mysteriously');
+      cy.get(`[data-cy="addressLine1"]`).should('have.value', 'short-term rigid mysteriously');
 
-      cy.get(`[data-cy="addressLine2"]`).type('overconfidently principal rainstorm');
-      cy.get(`[data-cy="addressLine2"]`).should('have.value', 'overconfidently principal rainstorm');
+      cy.get(`[data-cy="addressLine2"]`).type('woot');
+      cy.get(`[data-cy="addressLine2"]`).should('have.value', 'woot');
 
-      cy.get(`[data-cy="city"]`).type('New Krystalworth');
-      cy.get(`[data-cy="city"]`).should('have.value', 'New Krystalworth');
+      cy.get(`[data-cy="city"]`).type('Kannapolis');
+      cy.get(`[data-cy="city"]`).should('have.value', 'Kannapolis');
 
       cy.get(`[data-cy="role"]`).select('RENTOR');
 
-      cy.setFieldImageAsBytesOfEntity('avatar', 'integration-test.png', 'image/png');
-
       cy.get(`[data-cy="user"]`).select(1);
 
-      // since cypress clicks submit too fast before the blob fields are validated
-      cy.wait(200); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.get(entityCreateSaveButtonSelector).click();
 
       cy.wait('@postEntityRequest').then(({ response }) => {

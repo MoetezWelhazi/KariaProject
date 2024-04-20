@@ -2,7 +2,6 @@ package com.jhipster.demo.store.domain;
 
 import com.jhipster.demo.store.domain.enumeration.Gender;
 import com.jhipster.demo.store.domain.enumeration.RoleEnum;
-import jakarta.persistence.MapsId;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
@@ -31,7 +30,6 @@ public class KariaUser implements Serializable {
     @Column("last_name")
     private String lastName;
 
-    @NotNull(message = "must not be null")
     @Column("gender")
     private Gender gender;
 
@@ -59,16 +57,11 @@ public class KariaUser implements Serializable {
     @Column("role")
     private RoleEnum role;
 
-    @Column("avatar")
-    private byte[] avatar;
-
-    @Column("avatar_content_type")
-    private String avatarContentType;
-
     @Transient
-    @MapsId
     private User user;
 
+    @Column("user_id")
+    private Long userId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -202,43 +195,26 @@ public class KariaUser implements Serializable {
         this.role = role;
     }
 
-    public byte[] getAvatar() {
-        return this.avatar;
-    }
-
-    public KariaUser avatar(byte[] avatar) {
-        this.setAvatar(avatar);
-        return this;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getAvatarContentType() {
-        return this.avatarContentType;
-    }
-
-    public KariaUser avatarContentType(String avatarContentType) {
-        this.avatarContentType = avatarContentType;
-        return this;
-    }
-
-    public void setAvatarContentType(String avatarContentType) {
-        this.avatarContentType = avatarContentType;
-    }
-
     public User getUser() {
         return this.user;
     }
 
     public void setUser(User user) {
         this.user = user;
+        this.userId = user != null ? user.getId() : null;
     }
 
     public KariaUser user(User user) {
         this.setUser(user);
         return this;
+    }
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long user) {
+        this.userId = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -274,8 +250,6 @@ public class KariaUser implements Serializable {
             ", addressLine2='" + getAddressLine2() + "'" +
             ", city='" + getCity() + "'" +
             ", role='" + getRole() + "'" +
-            ", avatar='" + getAvatar() + "'" +
-            ", avatarContentType='" + getAvatarContentType() + "'" +
             "}";
     }
 }

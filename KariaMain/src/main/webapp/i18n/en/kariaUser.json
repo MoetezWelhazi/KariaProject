@@ -27,7 +27,6 @@
       "addressLine2": "Address Line 2",
       "city": "City",
       "role": "Role",
-      "avatar": "Avatar",
       "user": "User"
     }
   }

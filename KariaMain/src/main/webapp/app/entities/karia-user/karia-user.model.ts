@@ -13,8 +13,6 @@ export interface IKariaUser {
   addressLine2?: string | null;
   city?: string | null;
   role?: keyof typeof RoleEnum | null;
-  avatar?: string | null;
-  avatarContentType?: string | null;
   user?: Pick<IUser, 'id' | 'login'> | null;
 }
 

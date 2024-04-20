@@ -47,13 +47,6 @@
               <option [value]="gender">{{ 'kariaMainApp.Gender.' + gender | translate }}</option>
             }
           </select>
-          @if (editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)) {
-            <div>
-              @if (editForm.get('gender')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
-              }
-            </div>
-          }
         </div>
 
         <div class="mb-3">
@@ -143,49 +136,6 @@
               }
             </div>
           }
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" jhiTranslate="kariaMainApp.kariaUser.avatar" for="field_avatar">Avatar</label>
-          <div>
-            @if (editForm.get('avatar')!.value) {
-              <img
-                [src]="'data:' + editForm.get('avatarContentType')!.value + ';base64,' + editForm.get('avatar')!.value"
-                style="max-height: 100px"
-                alt="kariaUser image"
-              />
-            }
-            @if (editForm.get('avatar')!.value) {
-              <div class="form-text text-danger clearfix">
-                <span class="pull-start"
-                  >{{ editForm.get('avatarContentType')!.value }}, {{ byteSize(editForm.get('avatar')!.value!) }}</span
-                >
-                <button
-                  type="button"
-                  (click)="clearInputImage('avatar', 'avatarContentType', 'file_avatar')"
-                  class="btn btn-secondary btn-xs pull-end"
-                >
-                  <fa-icon icon="times"></fa-icon>
-                </button>
-              </div>
-            }
-            <input
-              type="file"
-              id="file_avatar"
-              data-cy="avatar"
-              (change)="setFileData($event, 'avatar', true)"
-              accept="image/*"
-              jhiTranslate="entity.action.addimage"
-            />
-          </div>
-          <input type="hidden" class="form-control" name="avatar" id="field_avatar" data-cy="avatar" formControlName="avatar" />
-          <input
-            type="hidden"
-            class="form-control"
-            name="avatarContentType"
-            id="field_avatarContentType"
-            formControlName="avatarContentType"
-          />
         </div>
 
         <div class="mb-3">
