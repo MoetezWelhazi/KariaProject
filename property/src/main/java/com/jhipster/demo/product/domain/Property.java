@@ -3,7 +3,6 @@ package com.jhipster.demo.product.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jhipster.demo.product.domain.enumeration.PropertyState;
 import com.jhipster.demo.product.domain.enumeration.Visibility;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -13,9 +12,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * Entities for property Microservice
+ * A Property.
  */
-@Schema(description = "Entities for property Microservice")
 @Entity
 @Table(name = "property")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

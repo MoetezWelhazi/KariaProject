@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20240417193556"
+    "changelogDate": "20240420155515"
   },
-  "applications": ["KariaMain", "property"],
+  "applications": ["property"],
   "clientRootFolder": "property",
   "databaseType": "sql",
-  "documentation": "Entities for property Microservice",
   "entityTableName": "property",
   "fields": [
     {

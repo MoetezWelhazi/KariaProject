@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "applicationIndex": 1,
+    "applicationIndex": 0,
     "applicationType": "microservice",
     "authenticationType": "jwt",
     "baseName": "property",
@@ -8,10 +8,9 @@
     "cacheProvider": "hazelcast",
     "entities": ["Property", "Tag", "Review"],
     "jhipsterVersion": "8.1.0",
-    "jwtSecretKey": "OTA5MjVhOGJjMzM1M2EwM2E2NDAzNzdlOWE4ZWQxZmM5ODdjMjc2MjlmNWQ2ZDk3NGFhYTRkMGJkMzBkNTM3NzMzNWJhOTk1MzhjNjU4NmE2YmNiYWNjMmFjYjkyZjczZGEyOTk4ZDI2MzFmNmRlYjVhNTkxNTY3NTdlODA1YWM=",
+    "jwtSecretKey": "NjgyMWRjZTE4ZjYxOWU1MGQ3NDc4Y2FlZTAyNWY0ZDZhYWE2NDhlYWYyOWU5NjVjZGVlMGE1NTU1OWFiMTI5YWQ0Y2QyZmE3NWZkZjQ0NDdkZTk3MWY5MTg0ZWJmNmU0NGI0ZjhiZDZlZWQ3ODM0MTk2ZWJiNmExZmE3Zjk4ZjU=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1713382676000,
-    "messageBroker": "kafka",
+    "lastLiquibaseTimestamp": 1713628635000,
     "monorepository": true,
     "nativeLanguage": "en",
     "packageFolder": "com/jhipster/demo/product",

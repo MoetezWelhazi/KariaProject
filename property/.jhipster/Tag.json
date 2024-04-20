@@ -1,8 +1,8 @@
 {
   "annotations": {
-    "changelogDate": "20240417193656"
+    "changelogDate": "20240420155615"
   },
-  "applications": ["KariaMain", "property"],
+  "applications": ["property"],
   "clientRootFolder": "property",
   "databaseType": "sql",
   "entityTableName": "tag",

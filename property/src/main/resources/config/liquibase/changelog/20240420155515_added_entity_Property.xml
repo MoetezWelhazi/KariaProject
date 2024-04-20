@@ -9,8 +9,8 @@
     <!--
         Added the entity Property.
     -->
-    <changeSet id="20240418162935-1" author="jhipster">
-        <createTable tableName="property" remarks="Entities for property Microservice">
+    <changeSet id="20240420155515-1" author="jhipster">
+        <createTable tableName="property">
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -69,7 +69,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20240418162935-1-relations" author="jhipster">
+    <changeSet id="20240420155515-1-relations" author="jhipster">
 
         <createTable tableName="rel_property__tags">
             <column name="tags_id" type="bigint">
@@ -93,7 +93,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20240418162935-1-data" author="jhipster" context="faker">
+    <changeSet id="20240420155515-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/property.csv"
                   separator=";"

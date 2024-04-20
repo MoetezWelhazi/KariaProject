@@ -1,7 +1,6 @@
 package com.jhipster.demo.product;
 
 import com.jhipster.demo.product.config.AsyncSyncConfiguration;
-import com.jhipster.demo.product.config.EmbeddedKafka;
 import com.jhipster.demo.product.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,6 +17,5 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(classes = { PropertyApp.class, AsyncSyncConfiguration.class })
 @EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-@EmbeddedKafka
 public @interface IntegrationTest {
 }
