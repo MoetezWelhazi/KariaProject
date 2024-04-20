@@ -60,7 +60,7 @@ public class AccountResource {
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        return userService.registerUser(managedUserVM, managedUserVM.getPassword(), managedUserVM.getPhoneNumber()).doOnSuccess(mailService::sendActivationEmail).then();
+        return userService.registerUser(managedUserVM, managedUserVM.getPassword(), managedUserVM.getPhoneNumber()).then();
     }
 
     /**

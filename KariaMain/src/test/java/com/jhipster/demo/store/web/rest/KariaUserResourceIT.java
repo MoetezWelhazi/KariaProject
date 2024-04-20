@@ -107,7 +107,7 @@ class KariaUserResourceIT {
             .role(DEFAULT_ROLE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
-        kariaUser.setUser(user);
+        kariaUser.setUser(user != null ? user.getId() : null);
         return kariaUser;
     }
 
@@ -130,7 +130,7 @@ class KariaUserResourceIT {
             .role(UPDATED_ROLE);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
-        kariaUser.setUser(user);
+        kariaUser.setUser(user!=null ? user.getId() : null);
         return kariaUser;
     }
 

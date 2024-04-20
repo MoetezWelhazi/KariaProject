@@ -99,6 +99,7 @@ public class UserService {
 
     @Transactional
     public Mono<User> registerUser(AdminUserDTO userDTO, String password, String phoneNumber) {
+        KariaUser kariaUser = new KariaUser();
         return userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .flatMap(existingUser -> {
@@ -132,12 +133,7 @@ public class UserService {
                     newUser.setImageUrl(userDTO.getImageUrl());
                     newUser.setLangKey(userDTO.getLangKey());
                     // new user is not active
-                    newUser.setActivated(false);
-                    // new user gets registration key
-                    newUser.setActivationKey(RandomUtil.generateActivationKey());
-                    // create and save the KariaUser entity
-                    KariaUser kariaUser = new KariaUser();
-                    kariaUser.setUser(newUser);
+                    newUser.setActivated(true);
                     kariaUser.setPhone(phoneNumber);
                     kariaUser.setRole(RoleEnum.RENTEE);
                     kariaUser.setFirstName(newUser.getFirstName());
@@ -146,8 +142,8 @@ public class UserService {
                     kariaUser.setAddressLine1("");
                     kariaUser.setGender(Gender.OTHER);
                     kariaUser.setCity("NaN");
-                    this.kariaUserService.save(kariaUser);
-
+                    // new user gets registration key
+                    newUser.setActivationKey(RandomUtil.generateActivationKey());
                     return newUser;
                 })
             )
@@ -159,9 +155,17 @@ public class UserService {
                     .thenReturn(newUser)
                     .doOnNext(user -> user.setAuthorities(authorities))
                     .flatMap(this::saveUser)
-                    .doOnNext(user -> log.debug("Created Information for User: {}", user));
+                    .flatMap(user -> {
+                        kariaUser.setUser(user.getId());
+                        return kariaUserService.save(kariaUser).thenReturn(user);
+                    })
+                    .doOnNext(user ->{
+                        log.debug("Created Information for User: {}", user);
+
+                    });
             });
     }
+
 
     @Transactional
     public Mono<User> createUser(AdminUserDTO userDTO) {
