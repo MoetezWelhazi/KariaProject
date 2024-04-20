@@ -38,6 +38,7 @@ public class KariaUserRowMapper implements BiFunction<Row, String, KariaUser> {
         entity.setRole(converter.fromRow(row, prefix + "_role", RoleEnum.class));
         entity.setAvatarContentType(converter.fromRow(row, prefix + "_avatar_content_type", String.class));
         entity.setAvatar(converter.fromRow(row, prefix + "_avatar", byte[].class));
+        entity.setUserId(converter.fromRow(row,prefix + "_user_id",Long.class));
         return entity;
     }
 }

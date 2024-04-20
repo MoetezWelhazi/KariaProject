@@ -16,7 +16,7 @@ public class ManagedUserVM extends AdminUserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
-    @Pattern(regexp="(^$|[0-9]{10})")
+    @Pattern(regexp="(^$|[0-9]{8})")
     private String phoneNumber;
 
     public ManagedUserVM() {

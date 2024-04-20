@@ -91,7 +91,10 @@ class KariaUserRepositoryInternalImpl extends SimpleR2dbcRepository<KariaUser, L
         Comparison whereClause = Conditions.isEqual(entityTable.column("id"), Conditions.just(id.toString()));
         return createQuery(null, whereClause).one();
     }
-
+    public Mono<KariaUser> findByPhone(String phone) {
+        Comparison whereClause = Conditions.isEqual(entityTable.column("phone"), Conditions.just(phone));
+        return createQuery(null, whereClause).one();
+    }
     @Override
     public Mono<KariaUser> findOneWithEagerRelationships(Long id) {
         return findById(id);

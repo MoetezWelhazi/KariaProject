@@ -234,12 +234,12 @@ public class KariaUser implements Serializable {
         return this.userId;
     }
 
-    public void setUser(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public KariaUser user(Long userId) {
-        this.setUser(userId);
+    public KariaUser userId(Long userId) {
+        this.setUserId(userId);
         return this;
     }
 

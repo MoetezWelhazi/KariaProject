@@ -90,6 +90,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>8.8.0</version>
+        </dependency>
+        <dependency>
             <groupId>tech.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
         </dependency>

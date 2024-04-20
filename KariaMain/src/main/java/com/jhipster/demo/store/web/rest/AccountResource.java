@@ -1,20 +1,22 @@
 package com.jhipster.demo.store.web.rest;
 
+import com.jhipster.demo.store.domain.User;
 import com.jhipster.demo.store.repository.UserRepository;
 import com.jhipster.demo.store.security.SecurityUtils;
 import com.jhipster.demo.store.service.MailService;
 import com.jhipster.demo.store.service.UserService;
-import com.jhipster.demo.store.service.dto.AdminUserDTO;
-import com.jhipster.demo.store.service.dto.PasswordChangeDTO;
+import com.jhipster.demo.store.service.dto.*;
 import com.jhipster.demo.store.web.rest.errors.*;
 import com.jhipster.demo.store.web.rest.vm.KeyAndPasswordVM;
 import com.jhipster.demo.store.web.rest.vm.ManagedUserVM;
+import jakarta.mail.Message;
 import jakarta.validation.Valid;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -140,7 +142,28 @@ public class AccountResource {
         }
         return userService.changePassword(passwordChangeDto.getCurrentPassword(), passwordChangeDto.getNewPassword());
     }
+    @PostMapping(path = "/reset-password")
+    public Mono<ResponseEntity<MessageDTO>> changePassword(@RequestBody PasswordDTO passwordDTO) {
+        if (isPasswordLengthInvalid(passwordDTO.getPassword())) {
+            throw new InvalidPasswordException();
+        }
+        return userService.resetPassword(passwordDTO.getPhoneNumber(),passwordDTO.getPassword())
+            .map(bool -> ResponseEntity.status(bool ? 200 : 400)
+                .body(new MessageDTO (bool ? "Password reset successfully" : "error while resetting password",bool ? 200 : 400)));
+    }
+    @PostMapping(path = "/forgot-password")
+    public Mono<ResponseEntity<MessageDTO>> forgotPassword(@RequestBody PhoneNumberDTO phoneNumberDTO) {
+        return userService.sendMessage(phoneNumberDTO.getPhoneNumber())
+            .thenReturn("Password reset instructions sent to " + phoneNumberDTO.getPhoneNumber())
+            .map(message -> ResponseEntity.ok().body(new MessageDTO(message,200)))
+            .defaultIfEmpty(ResponseEntity.badRequest().body(new MessageDTO("Failed to send password reset instructions",400)));
+    }
+    @PostMapping(path = "/validate-code")
+    public ResponseEntity<MessageDTO> validateCode(@RequestBody CodeDTO codeDTO) {
 
+        boolean bool = userService.checkCode(codeDTO.getCode(),codeDTO.getPhoneNumber());
+        return ResponseEntity.status(bool ? 200 : 400).body(new MessageDTO(bool ? "Code is correct !" : "Invalid code!",bool ? 200 : 400));
+    }
     /**
      * {@code POST   /account/reset-password/init} : Send an email to reset the password of the user.
      *
