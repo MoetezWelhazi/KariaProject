@@ -156,7 +156,7 @@ public class UserService {
                     .doOnNext(user -> user.setAuthorities(authorities))
                     .flatMap(this::saveUser)
                     .flatMap(user -> {
-                        kariaUser.setUser(user.getId());
+                        kariaUser.setUser(user);
                         return kariaUserService.save(kariaUser).thenReturn(user);
                     })
                     .doOnNext(user ->{
