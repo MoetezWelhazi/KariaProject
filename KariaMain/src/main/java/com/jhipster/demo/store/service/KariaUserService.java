@@ -47,6 +47,7 @@ public class KariaUserService {
         return kariaUserRepository.save(kariaUser);
     }
 
+
     /**
      * Partially update a kariaUser.
      *
@@ -133,7 +134,11 @@ public class KariaUserService {
         log.debug("Request to get KariaUser : {}", id);
         return kariaUserRepository.findOneWithEagerRelationships(id);
     }
-
+    @Transactional(readOnly = true)
+    public Mono<KariaUser> findOneByPhone(String phone) {
+        log.debug("Request to get KariaUser : {}", phone);
+        return kariaUserRepository.findByPhone(phone);
+    }
     /**
      * Delete the kariaUser by id.
      *

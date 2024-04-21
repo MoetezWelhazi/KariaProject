@@ -57,6 +57,7 @@ interface KariaUserRepositoryInternal {
 
     Mono<KariaUser> findOneWithEagerRelationships(Long id);
 
+    Mono<KariaUser> findByPhone(String phone);
     Flux<KariaUser> findAllWithEagerRelationships();
 
     Flux<KariaUser> findAllWithEagerRelationships(Pageable page);

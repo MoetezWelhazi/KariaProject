@@ -7,17 +7,24 @@ import com.jhipster.demo.store.domain.User;
 import com.jhipster.demo.store.domain.enumeration.Gender;
 import com.jhipster.demo.store.domain.enumeration.RoleEnum;
 import com.jhipster.demo.store.repository.AuthorityRepository;
-import com.jhipster.demo.store.repository.KariaUserRepository;
 import com.jhipster.demo.store.repository.UserRepository;
 import com.jhipster.demo.store.security.AuthoritiesConstants;
 import com.jhipster.demo.store.security.SecurityUtils;
 import com.jhipster.demo.store.service.dto.AdminUserDTO;
+import com.jhipster.demo.store.service.dto.PhoneVerification;
 import com.jhipster.demo.store.service.dto.UserDTO;
+
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -35,8 +42,11 @@ import tech.jhipster.security.RandomUtil;
  */
 @Service
 public class UserService {
-
+    private final HashMap<String, PhoneVerification> phoneCodes = new HashMap<>();
     private final Logger log = LoggerFactory.getLogger(UserService.class);
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    private static final int CODE_LENGTH = 4;
 
     private final UserRepository userRepository;
 
@@ -97,6 +107,69 @@ public class UserService {
             .flatMap(this::saveUser);
     }
 
+    private boolean checkPhoneNumber(String phoneNumber){
+        for (int digit = 0 ; digit < phoneNumber.length(); digit++){
+            if (phoneNumber.charAt(digit)< '0' || phoneNumber.charAt(digit) > '9')
+                return false;
+        }
+        return true;
+    }
+    @Transactional
+    public Mono<Boolean> sendMessage(String phoneNumber) {
+        return kariaUserService.findOneByPhone(phoneNumber).switchIfEmpty(Mono.empty()).flatMap(user ->{
+
+            if (user.getPhone().equals(phoneNumber) && phoneNumber.length() == 8 && checkPhoneNumber(phoneNumber)) {
+                Twilio.init(System.getenv("TWILIO_ACCOUNT_SID"), System.getenv("TWILIO_AUTH_TOKEN"));
+                StringBuilder codeBuilder = new StringBuilder();
+                for (int i = 0; i < CODE_LENGTH; i++) {
+                    int randomIndex = SECURE_RANDOM.nextInt(CHARACTERS.length());
+                    codeBuilder.append(CHARACTERS.charAt(randomIndex));
+                }
+                String code = codeBuilder.toString();
+                phoneCodes.put(user.getPhone(),new PhoneVerification(code));
+                Message.creator(new PhoneNumber("+216"+phoneNumber),
+                    new PhoneNumber("+16205518972"), "Your code is :" + code).create();
+                return Mono.just(true);
+            }
+            return Mono.just(false);
+            });
+    }
+    @Transactional
+    public Mono<Boolean> resetPassword(String phoneNumber,String password) {
+        AtomicBoolean isVerified = new AtomicBoolean(false);
+        return kariaUserService
+            .findOneByPhone(phoneNumber)
+            .flatMap(kariaUser -> {
+                if (phoneCodes.get(kariaUser.getPhone()).getVerified()){
+                    isVerified.set(true);
+                }
+
+                return Mono.just(kariaUser);
+            })
+            .flatMap(kariaUser -> {
+                log.debug(kariaUser.getUserId().toString());
+                return userRepository.findById(kariaUser.getUserId());})
+            .map(user -> {
+
+                if (isVerified.get()) {
+                    String encodedPassword = passwordEncoder.encode(user.getPassword());
+                    user.setPassword(password);
+                    phoneCodes.remove(phoneNumber);
+                }
+                return user;
+            })
+            .flatMap(this::saveUser)
+            .flatMap(user ->{
+                return Mono.just(isVerified.get());
+            });
+    }
+    public boolean checkCode( String code,String phoneNumber) {
+        if(phoneCodes.get(phoneNumber) != null && code.equals(phoneCodes.get(phoneNumber).getCode())){
+            phoneCodes.get(phoneNumber).setVerified(true);
+            return true;
+        }
+        return false;
+    }
     @Transactional
     public Mono<User> registerUser(AdminUserDTO userDTO, String password, String phoneNumber) {
         KariaUser kariaUser = new KariaUser();
