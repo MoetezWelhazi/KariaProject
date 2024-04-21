@@ -43,28 +43,25 @@
     },
     {
       "fieldName": "image1",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "image2",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "image3",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String"
     },
     {
       "fieldName": "image4",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String"
     },
     {
       "fieldName": "image5",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String"
     }
   ],
   "microserviceName": "property",

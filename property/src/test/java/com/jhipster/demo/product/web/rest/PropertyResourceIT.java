@@ -15,7 +15,6 @@ import com.jhipster.demo.product.repository.PropertyRepository;
 import com.jhipster.demo.product.service.PropertyService;
 import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -63,30 +62,20 @@ class PropertyResourceIT {
     private static final Visibility DEFAULT_VISIBILITY = Visibility.PUBLIC;
     private static final Visibility UPDATED_VISIBILITY = Visibility.PRIVATE;
 
-    private static final byte[] DEFAULT_IMAGE_1 = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE_1 = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGE_1_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_1_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE_1 = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_1 = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGE_2 = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE_2 = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGE_2_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_2_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE_2 = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_2 = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGE_3 = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE_3 = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGE_3_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_3_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE_3 = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_3 = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGE_4 = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE_4 = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGE_4_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_4_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE_4 = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_4 = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGE_5 = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE_5 = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGE_5_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_5_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE_5 = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_5 = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/properties";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -127,15 +116,10 @@ class PropertyResourceIT {
             .state(DEFAULT_STATE)
             .visibility(DEFAULT_VISIBILITY)
             .image1(DEFAULT_IMAGE_1)
-            .image1ContentType(DEFAULT_IMAGE_1_CONTENT_TYPE)
             .image2(DEFAULT_IMAGE_2)
-            .image2ContentType(DEFAULT_IMAGE_2_CONTENT_TYPE)
             .image3(DEFAULT_IMAGE_3)
-            .image3ContentType(DEFAULT_IMAGE_3_CONTENT_TYPE)
             .image4(DEFAULT_IMAGE_4)
-            .image4ContentType(DEFAULT_IMAGE_4_CONTENT_TYPE)
-            .image5(DEFAULT_IMAGE_5)
-            .image5ContentType(DEFAULT_IMAGE_5_CONTENT_TYPE);
+            .image5(DEFAULT_IMAGE_5);
         // Add required entity
         Tag tag;
         if (TestUtil.findAll(em, Tag.class).isEmpty()) {
@@ -165,15 +149,10 @@ class PropertyResourceIT {
             .state(UPDATED_STATE)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
-            .image1ContentType(UPDATED_IMAGE_1_CONTENT_TYPE)
             .image2(UPDATED_IMAGE_2)
-            .image2ContentType(UPDATED_IMAGE_2_CONTENT_TYPE)
             .image3(UPDATED_IMAGE_3)
-            .image3ContentType(UPDATED_IMAGE_3_CONTENT_TYPE)
             .image4(UPDATED_IMAGE_4)
-            .image4ContentType(UPDATED_IMAGE_4_CONTENT_TYPE)
-            .image5(UPDATED_IMAGE_5)
-            .image5ContentType(UPDATED_IMAGE_5_CONTENT_TYPE);
+            .image5(UPDATED_IMAGE_5);
         // Add required entity
         Tag tag;
         if (TestUtil.findAll(em, Tag.class).isEmpty()) {
@@ -213,15 +192,10 @@ class PropertyResourceIT {
         assertThat(testProperty.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testProperty.getVisibility()).isEqualTo(DEFAULT_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(DEFAULT_IMAGE_1);
-        assertThat(testProperty.getImage1ContentType()).isEqualTo(DEFAULT_IMAGE_1_CONTENT_TYPE);
         assertThat(testProperty.getImage2()).isEqualTo(DEFAULT_IMAGE_2);
-        assertThat(testProperty.getImage2ContentType()).isEqualTo(DEFAULT_IMAGE_2_CONTENT_TYPE);
         assertThat(testProperty.getImage3()).isEqualTo(DEFAULT_IMAGE_3);
-        assertThat(testProperty.getImage3ContentType()).isEqualTo(DEFAULT_IMAGE_3_CONTENT_TYPE);
         assertThat(testProperty.getImage4()).isEqualTo(DEFAULT_IMAGE_4);
-        assertThat(testProperty.getImage4ContentType()).isEqualTo(DEFAULT_IMAGE_4_CONTENT_TYPE);
         assertThat(testProperty.getImage5()).isEqualTo(DEFAULT_IMAGE_5);
-        assertThat(testProperty.getImage5ContentType()).isEqualTo(DEFAULT_IMAGE_5_CONTENT_TYPE);
     }
 
     @Test
@@ -312,6 +286,40 @@ class PropertyResourceIT {
 
     @Test
     @Transactional
+    void checkImage1IsRequired() throws Exception {
+        int databaseSizeBeforeTest = propertyRepository.findAll().size();
+        // set the field null
+        property.setImage1(null);
+
+        // Create the Property, which fails.
+
+        restPropertyMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(property)))
+            .andExpect(status().isBadRequest());
+
+        List<Property> propertyList = propertyRepository.findAll();
+        assertThat(propertyList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkImage2IsRequired() throws Exception {
+        int databaseSizeBeforeTest = propertyRepository.findAll().size();
+        // set the field null
+        property.setImage2(null);
+
+        // Create the Property, which fails.
+
+        restPropertyMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(property)))
+            .andExpect(status().isBadRequest());
+
+        List<Property> propertyList = propertyRepository.findAll();
+        assertThat(propertyList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllProperties() throws Exception {
         // Initialize the database
         propertyRepository.saveAndFlush(property);
@@ -329,16 +337,11 @@ class PropertyResourceIT {
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
-            .andExpect(jsonPath("$.[*].image1ContentType").value(hasItem(DEFAULT_IMAGE_1_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image1").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_1))))
-            .andExpect(jsonPath("$.[*].image2ContentType").value(hasItem(DEFAULT_IMAGE_2_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image2").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_2))))
-            .andExpect(jsonPath("$.[*].image3ContentType").value(hasItem(DEFAULT_IMAGE_3_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image3").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_3))))
-            .andExpect(jsonPath("$.[*].image4ContentType").value(hasItem(DEFAULT_IMAGE_4_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image4").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_4))))
-            .andExpect(jsonPath("$.[*].image5ContentType").value(hasItem(DEFAULT_IMAGE_5_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image5").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_5))));
+            .andExpect(jsonPath("$.[*].image1").value(hasItem(DEFAULT_IMAGE_1)))
+            .andExpect(jsonPath("$.[*].image2").value(hasItem(DEFAULT_IMAGE_2)))
+            .andExpect(jsonPath("$.[*].image3").value(hasItem(DEFAULT_IMAGE_3)))
+            .andExpect(jsonPath("$.[*].image4").value(hasItem(DEFAULT_IMAGE_4)))
+            .andExpect(jsonPath("$.[*].image5").value(hasItem(DEFAULT_IMAGE_5)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -377,16 +380,11 @@ class PropertyResourceIT {
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.visibility").value(DEFAULT_VISIBILITY.toString()))
-            .andExpect(jsonPath("$.image1ContentType").value(DEFAULT_IMAGE_1_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image1").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_1)))
-            .andExpect(jsonPath("$.image2ContentType").value(DEFAULT_IMAGE_2_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image2").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_2)))
-            .andExpect(jsonPath("$.image3ContentType").value(DEFAULT_IMAGE_3_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image3").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_3)))
-            .andExpect(jsonPath("$.image4ContentType").value(DEFAULT_IMAGE_4_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image4").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_4)))
-            .andExpect(jsonPath("$.image5ContentType").value(DEFAULT_IMAGE_5_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image5").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_5)));
+            .andExpect(jsonPath("$.image1").value(DEFAULT_IMAGE_1))
+            .andExpect(jsonPath("$.image2").value(DEFAULT_IMAGE_2))
+            .andExpect(jsonPath("$.image3").value(DEFAULT_IMAGE_3))
+            .andExpect(jsonPath("$.image4").value(DEFAULT_IMAGE_4))
+            .andExpect(jsonPath("$.image5").value(DEFAULT_IMAGE_5));
     }
 
     @Test
@@ -417,15 +415,10 @@ class PropertyResourceIT {
             .state(UPDATED_STATE)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
-            .image1ContentType(UPDATED_IMAGE_1_CONTENT_TYPE)
             .image2(UPDATED_IMAGE_2)
-            .image2ContentType(UPDATED_IMAGE_2_CONTENT_TYPE)
             .image3(UPDATED_IMAGE_3)
-            .image3ContentType(UPDATED_IMAGE_3_CONTENT_TYPE)
             .image4(UPDATED_IMAGE_4)
-            .image4ContentType(UPDATED_IMAGE_4_CONTENT_TYPE)
-            .image5(UPDATED_IMAGE_5)
-            .image5ContentType(UPDATED_IMAGE_5_CONTENT_TYPE);
+            .image5(UPDATED_IMAGE_5);
 
         restPropertyMockMvc
             .perform(
@@ -447,15 +440,10 @@ class PropertyResourceIT {
         assertThat(testProperty.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testProperty.getVisibility()).isEqualTo(UPDATED_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
-        assertThat(testProperty.getImage1ContentType()).isEqualTo(UPDATED_IMAGE_1_CONTENT_TYPE);
         assertThat(testProperty.getImage2()).isEqualTo(UPDATED_IMAGE_2);
-        assertThat(testProperty.getImage2ContentType()).isEqualTo(UPDATED_IMAGE_2_CONTENT_TYPE);
         assertThat(testProperty.getImage3()).isEqualTo(UPDATED_IMAGE_3);
-        assertThat(testProperty.getImage3ContentType()).isEqualTo(UPDATED_IMAGE_3_CONTENT_TYPE);
         assertThat(testProperty.getImage4()).isEqualTo(UPDATED_IMAGE_4);
-        assertThat(testProperty.getImage4ContentType()).isEqualTo(UPDATED_IMAGE_4_CONTENT_TYPE);
         assertThat(testProperty.getImage5()).isEqualTo(UPDATED_IMAGE_5);
-        assertThat(testProperty.getImage5ContentType()).isEqualTo(UPDATED_IMAGE_5_CONTENT_TYPE);
     }
 
     @Test
@@ -532,13 +520,9 @@ class PropertyResourceIT {
             .address(UPDATED_ADDRESS)
             .location(UPDATED_LOCATION)
             .image1(UPDATED_IMAGE_1)
-            .image1ContentType(UPDATED_IMAGE_1_CONTENT_TYPE)
             .image3(UPDATED_IMAGE_3)
-            .image3ContentType(UPDATED_IMAGE_3_CONTENT_TYPE)
             .image4(UPDATED_IMAGE_4)
-            .image4ContentType(UPDATED_IMAGE_4_CONTENT_TYPE)
-            .image5(UPDATED_IMAGE_5)
-            .image5ContentType(UPDATED_IMAGE_5_CONTENT_TYPE);
+            .image5(UPDATED_IMAGE_5);
 
         restPropertyMockMvc
             .perform(
@@ -560,15 +544,10 @@ class PropertyResourceIT {
         assertThat(testProperty.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testProperty.getVisibility()).isEqualTo(DEFAULT_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
-        assertThat(testProperty.getImage1ContentType()).isEqualTo(UPDATED_IMAGE_1_CONTENT_TYPE);
         assertThat(testProperty.getImage2()).isEqualTo(DEFAULT_IMAGE_2);
-        assertThat(testProperty.getImage2ContentType()).isEqualTo(DEFAULT_IMAGE_2_CONTENT_TYPE);
         assertThat(testProperty.getImage3()).isEqualTo(UPDATED_IMAGE_3);
-        assertThat(testProperty.getImage3ContentType()).isEqualTo(UPDATED_IMAGE_3_CONTENT_TYPE);
         assertThat(testProperty.getImage4()).isEqualTo(UPDATED_IMAGE_4);
-        assertThat(testProperty.getImage4ContentType()).isEqualTo(UPDATED_IMAGE_4_CONTENT_TYPE);
         assertThat(testProperty.getImage5()).isEqualTo(UPDATED_IMAGE_5);
-        assertThat(testProperty.getImage5ContentType()).isEqualTo(UPDATED_IMAGE_5_CONTENT_TYPE);
     }
 
     @Test
@@ -592,15 +571,10 @@ class PropertyResourceIT {
             .state(UPDATED_STATE)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
-            .image1ContentType(UPDATED_IMAGE_1_CONTENT_TYPE)
             .image2(UPDATED_IMAGE_2)
-            .image2ContentType(UPDATED_IMAGE_2_CONTENT_TYPE)
             .image3(UPDATED_IMAGE_3)
-            .image3ContentType(UPDATED_IMAGE_3_CONTENT_TYPE)
             .image4(UPDATED_IMAGE_4)
-            .image4ContentType(UPDATED_IMAGE_4_CONTENT_TYPE)
-            .image5(UPDATED_IMAGE_5)
-            .image5ContentType(UPDATED_IMAGE_5_CONTENT_TYPE);
+            .image5(UPDATED_IMAGE_5);
 
         restPropertyMockMvc
             .perform(
@@ -622,15 +596,10 @@ class PropertyResourceIT {
         assertThat(testProperty.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testProperty.getVisibility()).isEqualTo(UPDATED_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
-        assertThat(testProperty.getImage1ContentType()).isEqualTo(UPDATED_IMAGE_1_CONTENT_TYPE);
         assertThat(testProperty.getImage2()).isEqualTo(UPDATED_IMAGE_2);
-        assertThat(testProperty.getImage2ContentType()).isEqualTo(UPDATED_IMAGE_2_CONTENT_TYPE);
         assertThat(testProperty.getImage3()).isEqualTo(UPDATED_IMAGE_3);
-        assertThat(testProperty.getImage3ContentType()).isEqualTo(UPDATED_IMAGE_3_CONTENT_TYPE);
         assertThat(testProperty.getImage4()).isEqualTo(UPDATED_IMAGE_4);
-        assertThat(testProperty.getImage4ContentType()).isEqualTo(UPDATED_IMAGE_4_CONTENT_TYPE);
         assertThat(testProperty.getImage5()).isEqualTo(UPDATED_IMAGE_5);
-        assertThat(testProperty.getImage5ContentType()).isEqualTo(UPDATED_IMAGE_5_CONTENT_TYPE);
     }
 
     @Test

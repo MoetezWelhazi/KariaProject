@@ -83,32 +83,17 @@ public class PropertyService {
                 if (property.getImage1() != null) {
                     existingProperty.setImage1(property.getImage1());
                 }
-                if (property.getImage1ContentType() != null) {
-                    existingProperty.setImage1ContentType(property.getImage1ContentType());
-                }
                 if (property.getImage2() != null) {
                     existingProperty.setImage2(property.getImage2());
-                }
-                if (property.getImage2ContentType() != null) {
-                    existingProperty.setImage2ContentType(property.getImage2ContentType());
                 }
                 if (property.getImage3() != null) {
                     existingProperty.setImage3(property.getImage3());
                 }
-                if (property.getImage3ContentType() != null) {
-                    existingProperty.setImage3ContentType(property.getImage3ContentType());
-                }
                 if (property.getImage4() != null) {
                     existingProperty.setImage4(property.getImage4());
                 }
-                if (property.getImage4ContentType() != null) {
-                    existingProperty.setImage4ContentType(property.getImage4ContentType());
-                }
                 if (property.getImage5() != null) {
                     existingProperty.setImage5(property.getImage5());
-                }
-                if (property.getImage5ContentType() != null) {
-                    existingProperty.setImage5ContentType(property.getImage5ContentType());
                 }
 
                 return existingProperty;

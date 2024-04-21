@@ -54,40 +54,22 @@ public class Property implements Serializable {
     @Column(name = "visibility")
     private Visibility visibility;
 
-    @Lob
-    @Column(name = "image_1")
-    private byte[] image1;
+    @NotNull
+    @Column(name = "image_1", nullable = false)
+    private String image1;
 
-    @Column(name = "image_1_content_type")
-    private String image1ContentType;
+    @NotNull
+    @Column(name = "image_2", nullable = false)
+    private String image2;
 
-    @Lob
-    @Column(name = "image_2")
-    private byte[] image2;
-
-    @Column(name = "image_2_content_type")
-    private String image2ContentType;
-
-    @Lob
     @Column(name = "image_3")
-    private byte[] image3;
+    private String image3;
 
-    @Column(name = "image_3_content_type")
-    private String image3ContentType;
-
-    @Lob
     @Column(name = "image_4")
-    private byte[] image4;
+    private String image4;
 
-    @Column(name = "image_4_content_type")
-    private String image4ContentType;
-
-    @Lob
     @Column(name = "image_5")
-    private byte[] image5;
-
-    @Column(name = "image_5_content_type")
-    private String image5ContentType;
+    private String image5;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "propertyId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -211,134 +193,69 @@ public class Property implements Serializable {
         this.visibility = visibility;
     }
 
-    public byte[] getImage1() {
+    public String getImage1() {
         return this.image1;
     }
 
-    public Property image1(byte[] image1) {
+    public Property image1(String image1) {
         this.setImage1(image1);
         return this;
     }
 
-    public void setImage1(byte[] image1) {
+    public void setImage1(String image1) {
         this.image1 = image1;
     }
 
-    public String getImage1ContentType() {
-        return this.image1ContentType;
-    }
-
-    public Property image1ContentType(String image1ContentType) {
-        this.image1ContentType = image1ContentType;
-        return this;
-    }
-
-    public void setImage1ContentType(String image1ContentType) {
-        this.image1ContentType = image1ContentType;
-    }
-
-    public byte[] getImage2() {
+    public String getImage2() {
         return this.image2;
     }
 
-    public Property image2(byte[] image2) {
+    public Property image2(String image2) {
         this.setImage2(image2);
         return this;
     }
 
-    public void setImage2(byte[] image2) {
+    public void setImage2(String image2) {
         this.image2 = image2;
     }
 
-    public String getImage2ContentType() {
-        return this.image2ContentType;
-    }
-
-    public Property image2ContentType(String image2ContentType) {
-        this.image2ContentType = image2ContentType;
-        return this;
-    }
-
-    public void setImage2ContentType(String image2ContentType) {
-        this.image2ContentType = image2ContentType;
-    }
-
-    public byte[] getImage3() {
+    public String getImage3() {
         return this.image3;
     }
 
-    public Property image3(byte[] image3) {
+    public Property image3(String image3) {
         this.setImage3(image3);
         return this;
     }
 
-    public void setImage3(byte[] image3) {
+    public void setImage3(String image3) {
         this.image3 = image3;
     }
 
-    public String getImage3ContentType() {
-        return this.image3ContentType;
-    }
-
-    public Property image3ContentType(String image3ContentType) {
-        this.image3ContentType = image3ContentType;
-        return this;
-    }
-
-    public void setImage3ContentType(String image3ContentType) {
-        this.image3ContentType = image3ContentType;
-    }
-
-    public byte[] getImage4() {
+    public String getImage4() {
         return this.image4;
     }
 
-    public Property image4(byte[] image4) {
+    public Property image4(String image4) {
         this.setImage4(image4);
         return this;
     }
 
-    public void setImage4(byte[] image4) {
+    public void setImage4(String image4) {
         this.image4 = image4;
     }
 
-    public String getImage4ContentType() {
-        return this.image4ContentType;
-    }
-
-    public Property image4ContentType(String image4ContentType) {
-        this.image4ContentType = image4ContentType;
-        return this;
-    }
-
-    public void setImage4ContentType(String image4ContentType) {
-        this.image4ContentType = image4ContentType;
-    }
-
-    public byte[] getImage5() {
+    public String getImage5() {
         return this.image5;
     }
 
-    public Property image5(byte[] image5) {
+    public Property image5(String image5) {
         this.setImage5(image5);
         return this;
     }
 
-    public void setImage5(byte[] image5) {
+    public void setImage5(String image5) {
         this.image5 = image5;
-    }
-
-    public String getImage5ContentType() {
-        return this.image5ContentType;
-    }
-
-    public Property image5ContentType(String image5ContentType) {
-        this.image5ContentType = image5ContentType;
-        return this;
-    }
-
-    public void setImage5ContentType(String image5ContentType) {
-        this.image5ContentType = image5ContentType;
     }
 
     public Set<Review> getReviews() {
@@ -427,15 +344,10 @@ public class Property implements Serializable {
             ", state='" + getState() + "'" +
             ", visibility='" + getVisibility() + "'" +
             ", image1='" + getImage1() + "'" +
-            ", image1ContentType='" + getImage1ContentType() + "'" +
             ", image2='" + getImage2() + "'" +
-            ", image2ContentType='" + getImage2ContentType() + "'" +
             ", image3='" + getImage3() + "'" +
-            ", image3ContentType='" + getImage3ContentType() + "'" +
             ", image4='" + getImage4() + "'" +
-            ", image4ContentType='" + getImage4ContentType() + "'" +
             ", image5='" + getImage5() + "'" +
-            ", image5ContentType='" + getImage5ContentType() + "'" +
             "}";
     }
 }

@@ -16,7 +16,12 @@ public class PropertyTestSamples {
             .name("name1")
             .description("description1")
             .address("address1")
-            .location("location1");
+            .location("location1")
+            .image1("image11")
+            .image2("image21")
+            .image3("image31")
+            .image4("image41")
+            .image5("image51");
     }
 
     public static Property getPropertySample2() {
@@ -26,7 +31,12 @@ public class PropertyTestSamples {
             .name("name2")
             .description("description2")
             .address("address2")
-            .location("location2");
+            .location("location2")
+            .image1("image12")
+            .image2("image22")
+            .image3("image32")
+            .image4("image42")
+            .image5("image52");
     }
 
     public static Property getPropertyRandomSampleGenerator() {
@@ -36,6 +46,11 @@ public class PropertyTestSamples {
             .name(UUID.randomUUID().toString())
             .description(UUID.randomUUID().toString())
             .address(UUID.randomUUID().toString())
-            .location(UUID.randomUUID().toString());
+            .location(UUID.randomUUID().toString())
+            .image1(UUID.randomUUID().toString())
+            .image2(UUID.randomUUID().toString())
+            .image3(UUID.randomUUID().toString())
+            .image4(UUID.randomUUID().toString())
+            .image5(UUID.randomUUID().toString());
     }
 }

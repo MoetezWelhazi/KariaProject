@@ -6,6 +6,7 @@
     "baseName": "property",
     "buildTool": "maven",
     "cacheProvider": "hazelcast",
+    "creationTimestamp": 1713705911056,
     "entities": ["Property", "Tag", "Review"],
     "jhipsterVersion": "8.1.0",
     "jwtSecretKey": "NjgyMWRjZTE4ZjYxOWU1MGQ3NDc4Y2FlZTAyNWY0ZDZhYWE2NDhlYWYyOWU5NjVjZGVlMGE1NTU1OWFiMTI5YWQ0Y2QyZmE3NWZkZjQ0NDdkZTk3MWY5MTg0ZWJmNmU0NGI0ZjhiZDZlZWQ3ODM0MTk2ZWJiNmExZmE3Zjk4ZjU=",
