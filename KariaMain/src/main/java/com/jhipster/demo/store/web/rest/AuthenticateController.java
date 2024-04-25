@@ -4,11 +4,14 @@ import static com.jhipster.demo.store.security.SecurityUtils.AUTHORITIES_KEY;
 import static com.jhipster.demo.store.security.SecurityUtils.JWT_ALGORITHM;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jhipster.demo.store.domain.User;
+import com.jhipster.demo.store.service.UserService;
 import com.jhipster.demo.store.web.rest.vm.LoginVM;
 import jakarta.validation.Valid;
 import java.security.Principal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,10 +50,14 @@ public class AuthenticateController {
 
     private final ReactiveAuthenticationManager authenticationManager;
 
-    public AuthenticateController(JwtEncoder jwtEncoder, ReactiveAuthenticationManager authenticationManager) {
+    private final UserService userService;
+
+    public AuthenticateController(UserService userService, JwtEncoder jwtEncoder, ReactiveAuthenticationManager authenticationManager) {
         this.jwtEncoder = jwtEncoder;
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
+
     @CrossOrigin("*")
     @PostMapping("/authenticate")
     public Mono<ResponseEntity<JWTToken>> authorize(@Valid @RequestBody Mono<LoginVM> loginVM) {
@@ -58,12 +65,18 @@ public class AuthenticateController {
             .flatMap(login ->
                 authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()))
-                    .flatMap(auth -> Mono.fromCallable(() -> this.createToken(auth, login.isRememberMe())))
+                    .zipWith(userService.getUserWithAuthoritiesByLogin(login.getUsername()))
+                    .flatMap(tuple -> {
+                        Authentication auth = tuple.getT1(); // Result of authentication
+                        User user = tuple.getT2(); // Result of userService
+
+                        return Mono.fromCallable(() -> this.createToken(auth, login.isRememberMe(), user.getId()));
+                    })
             )
             .map(jwt -> {
                 HttpHeaders httpHeaders = new HttpHeaders();
-                httpHeaders.setBearerAuth(jwt);
-                return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+                httpHeaders.setBearerAuth(jwt.getIdToken());
+                return new ResponseEntity<>(jwt, httpHeaders, HttpStatus.OK);
             });
     }
 
@@ -79,7 +92,7 @@ public class AuthenticateController {
         return request.getPrincipal().map(Principal::getName);
     }
 
-    public String createToken(Authentication authentication, boolean rememberMe) {
+    public JWTToken createToken(Authentication authentication, boolean rememberMe, Long userId) {
         String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
 
         Instant now = Instant.now();
@@ -99,8 +112,9 @@ public class AuthenticateController {
             .build();
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
+        return new JWTToken(this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue(),userId);
     }
+
 
     /**
      * Object to return as body in JWT Authentication.
@@ -109,8 +123,11 @@ public class AuthenticateController {
 
         private String idToken;
 
-        JWTToken(String idToken) {
+        private Long userId;
+
+        JWTToken(String idToken, Long userId) {
             this.idToken = idToken;
+            this.userId = userId;
         }
 
         @JsonProperty("id_token")
@@ -121,5 +138,10 @@ public class AuthenticateController {
         void setIdToken(String idToken) {
             this.idToken = idToken;
         }
+
+        @JsonProperty("user_id")
+        Long getUserId() { return userId; }
+
+        void setUserId(Long userId) { this.userId = userId; }
     }
 }
