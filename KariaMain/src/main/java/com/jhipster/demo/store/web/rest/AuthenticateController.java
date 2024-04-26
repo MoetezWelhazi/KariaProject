@@ -28,6 +28,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -69,10 +70,10 @@ public class AuthenticateController {
                     .flatMap(tuple -> {
                         Authentication auth = tuple.getT1(); // Result of authentication
                         User user = tuple.getT2(); // Result of userService
-
                         return Mono.fromCallable(() -> this.createToken(auth, login.isRememberMe(), user.getId()));
                     })
             )
+            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)))
             .map(jwt -> {
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.setBearerAuth(jwt.getIdToken());
