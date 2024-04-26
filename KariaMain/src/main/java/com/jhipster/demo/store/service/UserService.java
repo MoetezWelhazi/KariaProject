@@ -150,18 +150,15 @@ public class UserService {
                 log.debug(kariaUser.getUserId().toString());
                 return userRepository.findById(kariaUser.getUserId());})
             .map(user -> {
-
                 if (isVerified.get()) {
                     String encodedPassword = passwordEncoder.encode(user.getPassword());
-                    user.setPassword(password);
+                    user.setPassword(encodedPassword);
                     phoneCodes.remove(phoneNumber);
                 }
                 return user;
             })
             .flatMap(this::saveUser)
-            .flatMap(user ->{
-                return Mono.just(isVerified.get());
-            });
+            .flatMap(user -> Mono.just(isVerified.get()));
     }
     public boolean checkCode( String code,String phoneNumber) {
         if(phoneCodes.get(phoneNumber) != null && code.equals(phoneCodes.get(phoneNumber).getCode())){
