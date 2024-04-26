@@ -59,6 +59,12 @@ class PropertyResourceIT {
     private static final PropertyState DEFAULT_STATE = PropertyState.AVAILABLE;
     private static final PropertyState UPDATED_STATE = PropertyState.UNAVAILABLE;
 
+    private static final Double DEFAULT_COORDINATES_LAT = 1D;
+    private static final Double UPDATED_COORDINATES_LAT = 2D;
+
+    private static final Double DEFAULT_COORDINATES_LNG = 1D;
+    private static final Double UPDATED_COORDINATES_LNG = 2D;
+
     private static final Visibility DEFAULT_VISIBILITY = Visibility.PUBLIC;
     private static final Visibility UPDATED_VISIBILITY = Visibility.PRIVATE;
 
@@ -114,6 +120,8 @@ class PropertyResourceIT {
             .address(DEFAULT_ADDRESS)
             .location(DEFAULT_LOCATION)
             .state(DEFAULT_STATE)
+            .coordinatesLat(DEFAULT_COORDINATES_LAT)
+            .coordinatesLng(DEFAULT_COORDINATES_LNG)
             .visibility(DEFAULT_VISIBILITY)
             .image1(DEFAULT_IMAGE_1)
             .image2(DEFAULT_IMAGE_2)
@@ -147,6 +155,8 @@ class PropertyResourceIT {
             .address(UPDATED_ADDRESS)
             .location(UPDATED_LOCATION)
             .state(UPDATED_STATE)
+            .coordinatesLat(UPDATED_COORDINATES_LAT)
+            .coordinatesLng(UPDATED_COORDINATES_LNG)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
             .image2(UPDATED_IMAGE_2)
@@ -190,6 +200,8 @@ class PropertyResourceIT {
         assertThat(testProperty.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testProperty.getLocation()).isEqualTo(DEFAULT_LOCATION);
         assertThat(testProperty.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testProperty.getCoordinatesLat()).isEqualTo(DEFAULT_COORDINATES_LAT);
+        assertThat(testProperty.getCoordinatesLng()).isEqualTo(DEFAULT_COORDINATES_LNG);
         assertThat(testProperty.getVisibility()).isEqualTo(DEFAULT_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(DEFAULT_IMAGE_1);
         assertThat(testProperty.getImage2()).isEqualTo(DEFAULT_IMAGE_2);
@@ -336,6 +348,8 @@ class PropertyResourceIT {
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].coordinatesLat").value(hasItem(DEFAULT_COORDINATES_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].coordinatesLng").value(hasItem(DEFAULT_COORDINATES_LNG.doubleValue())))
             .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
             .andExpect(jsonPath("$.[*].image1").value(hasItem(DEFAULT_IMAGE_1)))
             .andExpect(jsonPath("$.[*].image2").value(hasItem(DEFAULT_IMAGE_2)))
@@ -379,6 +393,8 @@ class PropertyResourceIT {
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.coordinatesLat").value(DEFAULT_COORDINATES_LAT.doubleValue()))
+            .andExpect(jsonPath("$.coordinatesLng").value(DEFAULT_COORDINATES_LNG.doubleValue()))
             .andExpect(jsonPath("$.visibility").value(DEFAULT_VISIBILITY.toString()))
             .andExpect(jsonPath("$.image1").value(DEFAULT_IMAGE_1))
             .andExpect(jsonPath("$.image2").value(DEFAULT_IMAGE_2))
@@ -413,6 +429,8 @@ class PropertyResourceIT {
             .address(UPDATED_ADDRESS)
             .location(UPDATED_LOCATION)
             .state(UPDATED_STATE)
+            .coordinatesLat(UPDATED_COORDINATES_LAT)
+            .coordinatesLng(UPDATED_COORDINATES_LNG)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
             .image2(UPDATED_IMAGE_2)
@@ -438,6 +456,8 @@ class PropertyResourceIT {
         assertThat(testProperty.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testProperty.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testProperty.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testProperty.getCoordinatesLat()).isEqualTo(UPDATED_COORDINATES_LAT);
+        assertThat(testProperty.getCoordinatesLng()).isEqualTo(UPDATED_COORDINATES_LNG);
         assertThat(testProperty.getVisibility()).isEqualTo(UPDATED_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
         assertThat(testProperty.getImage2()).isEqualTo(UPDATED_IMAGE_2);
@@ -519,7 +539,9 @@ class PropertyResourceIT {
             .name(UPDATED_NAME)
             .address(UPDATED_ADDRESS)
             .location(UPDATED_LOCATION)
+            .coordinatesLng(UPDATED_COORDINATES_LNG)
             .image1(UPDATED_IMAGE_1)
+            .image2(UPDATED_IMAGE_2)
             .image3(UPDATED_IMAGE_3)
             .image4(UPDATED_IMAGE_4)
             .image5(UPDATED_IMAGE_5);
@@ -542,9 +564,11 @@ class PropertyResourceIT {
         assertThat(testProperty.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testProperty.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testProperty.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testProperty.getCoordinatesLat()).isEqualTo(DEFAULT_COORDINATES_LAT);
+        assertThat(testProperty.getCoordinatesLng()).isEqualTo(UPDATED_COORDINATES_LNG);
         assertThat(testProperty.getVisibility()).isEqualTo(DEFAULT_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
-        assertThat(testProperty.getImage2()).isEqualTo(DEFAULT_IMAGE_2);
+        assertThat(testProperty.getImage2()).isEqualTo(UPDATED_IMAGE_2);
         assertThat(testProperty.getImage3()).isEqualTo(UPDATED_IMAGE_3);
         assertThat(testProperty.getImage4()).isEqualTo(UPDATED_IMAGE_4);
         assertThat(testProperty.getImage5()).isEqualTo(UPDATED_IMAGE_5);
@@ -569,6 +593,8 @@ class PropertyResourceIT {
             .address(UPDATED_ADDRESS)
             .location(UPDATED_LOCATION)
             .state(UPDATED_STATE)
+            .coordinatesLat(UPDATED_COORDINATES_LAT)
+            .coordinatesLng(UPDATED_COORDINATES_LNG)
             .visibility(UPDATED_VISIBILITY)
             .image1(UPDATED_IMAGE_1)
             .image2(UPDATED_IMAGE_2)
@@ -594,6 +620,8 @@ class PropertyResourceIT {
         assertThat(testProperty.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testProperty.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testProperty.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testProperty.getCoordinatesLat()).isEqualTo(UPDATED_COORDINATES_LAT);
+        assertThat(testProperty.getCoordinatesLng()).isEqualTo(UPDATED_COORDINATES_LNG);
         assertThat(testProperty.getVisibility()).isEqualTo(UPDATED_VISIBILITY);
         assertThat(testProperty.getImage1()).isEqualTo(UPDATED_IMAGE_1);
         assertThat(testProperty.getImage2()).isEqualTo(UPDATED_IMAGE_2);

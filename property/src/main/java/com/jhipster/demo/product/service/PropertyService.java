@@ -77,6 +77,12 @@ public class PropertyService {
                 if (property.getState() != null) {
                     existingProperty.setState(property.getState());
                 }
+                if (property.getCoordinatesLat() != null) {
+                    existingProperty.setCoordinatesLat(property.getCoordinatesLat());
+                }
+                if (property.getCoordinatesLng() != null) {
+                    existingProperty.setCoordinatesLng(property.getCoordinatesLng());
+                }
                 if (property.getVisibility() != null) {
                     existingProperty.setVisibility(property.getVisibility());
                 }

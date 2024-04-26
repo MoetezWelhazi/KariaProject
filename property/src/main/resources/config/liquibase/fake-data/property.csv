@@ -1,11 +1,11 @@
-id;owner_id;name;description;address;location;state;visibility;image_1;image_2;image_3;image_4;image_5
-1;oh whoa;apud;ferret wholly;general through brr;thunderhead;RENTED;PUBLIC;than nor circa;reproachfully;hugger;enormously;slimy
-2;gleeful;unless subtle;quarrelsomely bite-sized disguised;safely;at beatbox upwardly;RENTED;PUBLIC;gee;quirkily;pro than;deal;wildly countermand noteworthy
-3;boohoo astride;anenst not;punctually winery innocently;during glaring pig;supersede apropos;RENTED;PRIVATE;over;uh-huh;realm cocoon;of predispose rally;edify but
-4;gratitude;rejig pink indeed;ukulele;forest qua ha;repeatedly;RENTED;PRIVATE;brr likewise while;pfft;dissect below;down;although surprisingly underneath
-5;pro;chauffeur;cabana besides whirlwind;eek besides;objection meh experiment;AVAILABLE;PRIVATE;amplify phooey ha;since cling calico;hmph;encounter mingle;beautiful diligently
-6;citrus;eel;and carabao er;psst quicker;hence;AVAILABLE;PUBLIC;questionably;selfishly sugar;cleaner or finally;violently ugh;across
-7;past;who given;formalise;ick however;freely drat blah;RENTED;PUBLIC;jealously sizzling astride;deadline what;naturally given;consequently;awesome apropos astride
-8;amusement as;longingly dapper several;instantly;unibody industrialise differentiate;traditionalism;AVAILABLE;PUBLIC;geez ah foxglove;than through;up teeming;silk;wind after
-9;deeply;configure if;midst sneaker;aw thankfully;exotic;AVAILABLE;PRIVATE;or bubbly courageous;upliftingly line exchange;deliberately slowly;in which duh;ah duh although
-10;via;closely completion;sympathetically deeply bah;deceivingly abolishment;until;UNAVAILABLE;PRIVATE;hmph not beneath;limited woot;rigid provided;minus consequently choice;apprehensive yahoo
+id;owner_id;name;description;address;location;state;coordinates_lat;coordinates_lng;visibility;image_1;image_2;image_3;image_4;image_5
+1;oh whoa;apud;ferret wholly;general through brr;thunderhead;RENTED;14255.19;32276.11;PRIVATE;unlike idealise;forgo ick behind;beautifully slimy;gleeful;unless subtle
+2;quarrelsomely bite-sized disguised;safely;at beatbox upwardly;almanac but when;feel;UNAVAILABLE;2099.92;25965;PUBLIC;underneath wildly;far haunting boohoo;like anenst not;punctually winery innocently;during glaring pig
+3;supersede apropos;geez but for;leading;for grandiose;cosset suspect;AVAILABLE;25471.16;9391.83;PUBLIC;freak;lest certainty incredible;considering quadrant;generously plunder;beyond spool burly
+4;delightfully wisely elongation;declaim;ack kissingly;deem sometimes;gee;RENTED;2472.25;16886.11;PRIVATE;cheddar what hastily;and;cohere heritage;handle frizzle insistent;whenever
+5;huzzah anenst;dolphin;lopsided;ugh anti;infinite;RENTED;2812.7;7387.74;PRIVATE;mingle;beautiful diligently;citrus;eel;and carabao er
+6;psst quicker;hence;used;too;clatter;RENTED;30575.16;4594.62;PRIVATE;huzzah hastily incriminate;consequently;below;adventurously sans huzzah;phew excepting from
+7;next;before for;swiftly;hourly leafy;believe oh;AVAILABLE;7684.11;25884.69;PRIVATE;symmetry;omega;memorise whelp;aside geez um;um stigmatise
+8;well-off;several;instantly;unibody industrialise differentiate;traditionalism;AVAILABLE;9006.93;29110.42;PUBLIC;hm nor wink;duh;digitise exculpate;blindly unnecessarily;disinhibit
+9;intently throughout;overachieve award under;unlike restore entire;bowlful;below private;AVAILABLE;13475.71;23103.28;PRIVATE;wheel and fooey;boo gosh;indolent fooey utterly;evergreen;since suburban
+10;eek commence;near rubbish;unleash that within;via boohoo;since on on;UNAVAILABLE;17109.87;6529.77;PRIVATE;hilarious ironclad aha;arrogantly cholesterol;naturally;round;super

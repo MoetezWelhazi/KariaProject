@@ -50,6 +50,12 @@ public class Property implements Serializable {
     @Column(name = "state", nullable = false)
     private PropertyState state;
 
+    @Column(name = "coordinates_lat")
+    private Double coordinatesLat;
+
+    @Column(name = "coordinates_lng")
+    private Double coordinatesLng;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "visibility")
     private Visibility visibility;
@@ -178,6 +184,32 @@ public class Property implements Serializable {
 
     public void setState(PropertyState state) {
         this.state = state;
+    }
+
+    public Double getCoordinatesLat() {
+        return this.coordinatesLat;
+    }
+
+    public Property coordinatesLat(Double coordinatesLat) {
+        this.setCoordinatesLat(coordinatesLat);
+        return this;
+    }
+
+    public void setCoordinatesLat(Double coordinatesLat) {
+        this.coordinatesLat = coordinatesLat;
+    }
+
+    public Double getCoordinatesLng() {
+        return this.coordinatesLng;
+    }
+
+    public Property coordinatesLng(Double coordinatesLng) {
+        this.setCoordinatesLng(coordinatesLng);
+        return this;
+    }
+
+    public void setCoordinatesLng(Double coordinatesLng) {
+        this.coordinatesLng = coordinatesLng;
     }
 
     public Visibility getVisibility() {
@@ -342,6 +374,8 @@ public class Property implements Serializable {
             ", address='" + getAddress() + "'" +
             ", location='" + getLocation() + "'" +
             ", state='" + getState() + "'" +
+            ", coordinatesLat=" + getCoordinatesLat() +
+            ", coordinatesLng=" + getCoordinatesLng() +
             ", visibility='" + getVisibility() + "'" +
             ", image1='" + getImage1() + "'" +
             ", image2='" + getImage2() + "'" +

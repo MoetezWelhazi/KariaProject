@@ -37,6 +37,14 @@
       "fieldValues": "AVAILABLE,UNAVAILABLE,RENTED"
     },
     {
+      "fieldName": "coordinatesLat",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "coordinatesLng",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "visibility",
       "fieldType": "Visibility",
       "fieldValues": "PUBLIC,PRIVATE"

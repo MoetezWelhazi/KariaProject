@@ -32,6 +32,12 @@
             <column name="state" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="coordinates_lat" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="coordinates_lng" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="visibility" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -91,6 +97,8 @@
             <column name="address" type="string"/>
             <column name="location" type="string"/>
             <column name="state" type="string"/>
+            <column name="coordinates_lat" type="numeric"/>
+            <column name="coordinates_lng" type="numeric"/>
             <column name="visibility" type="string"/>
             <column name="image_1" type="string"/>
             <column name="image_2" type="string"/>
