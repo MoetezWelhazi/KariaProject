@@ -73,7 +73,7 @@ public class AuthenticateController {
                         return Mono.fromCallable(() -> this.createToken(auth, login.isRememberMe(), user.getId()));
                     })
             )
-            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)))
+            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Credentials")))
             .map(jwt -> {
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.setBearerAuth(jwt.getIdToken());
